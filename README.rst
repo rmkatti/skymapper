@@ -26,7 +26,8 @@ deep sky scan surveys built on python's Numpy and Matplotlib libraries.
 
    ..
 
-
+Version Information
+--------------------
 
 :Date: 2014-10-8
 :Version: 1.0.0
