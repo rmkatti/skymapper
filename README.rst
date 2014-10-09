@@ -6,7 +6,8 @@ skymapper
 **skymapper** is a tool for visualization and analysis of all-sky and 
 deep sky scans built on python's Numpy and Matplotlib libraries.
 
-**Mollweide Projection of all-sky scan hits map for small wavelength range**
+
+** Hits Map of All Sky Scan (Mollweide Projection) **
 
 .. figure:: allsky2_complete_1.png
    :align:  center
@@ -16,7 +17,7 @@ deep sky scans built on python's Numpy and Matplotlib libraries.
    ..
 
 
-**Hits map of deep sky survey of north celestial pole** 
+**Hits Map of Deep Sky Scan About North Celestial Pole (Polar Plot)** 
 
 .. figure:: phi_365_uniform_fulllambda.png
    :align: center
