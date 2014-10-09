@@ -9,7 +9,7 @@ deep sky scan surveys built on python's Numpy and Matplotlib libraries.
 
 **Hits Map of All Sky Scan (Mollweide Projection)**
 
-.. figure:: allsky2_complete_1.png
+.. figure:: ../_build/allsky2_complete_1.png
    :align:  center
    :alt: All Sky scan
    :figclass: align-center
@@ -19,7 +19,7 @@ deep sky scan surveys built on python's Numpy and Matplotlib libraries.
 
 **Hits Map of Deep Sky Scan About North Celestial Pole (Polar Plot)** 
 
-.. figure:: phi_365_uniform_fulllambda.png
+.. figure:: ../_build/phi_365_uniform_fulllambda.png
    :align: center
    :alt: Deep Sky Scan
    :figclass: align-center
