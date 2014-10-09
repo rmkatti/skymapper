@@ -35,5 +35,6 @@ The standard python module for data visualization: http://matplotlib.org/
 3) **Healpix**
 Python implementation of the HEALPIX algorithm. Useful for discretization 
 of the sky in CMB and astronomy-related work: 
-- HEALPIX: http://healpix.jpl.nasa.gov/
-- healpy documentation: http://healpy.readthedocs.org/en/latest/
+
+* HEALPIX: http://healpix.jpl.nasa.gov/
+* healpy documentation: http://healpy.readthedocs.org/en/latest/
