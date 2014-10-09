@@ -7,7 +7,7 @@ skymapper
 deep sky scans built on python's Numpy and Matplotlib libraries.
 
 
-** Hits Map of All Sky Scan (Mollweide Projection) **
+**Hits Map of All Sky Scan (Mollweide Projection)**
 
 .. figure:: allsky2_complete_1.png
    :align:  center
