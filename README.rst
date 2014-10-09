@@ -9,12 +9,14 @@ deep sky scans built on python's Numpy and Matplotlib libraries.
 .. figure:: allsky2_complete_1.png
    :align:  center
    :alt: All Sky scan
+   :figclass: align-center
 
    Mollweide Projection of all-sky scan hits map for small wavelength range
 
 .. figure:: phi_365_uniform_fulllambda.png
    :align: center
    :alt: Deep Sky Scan
+   :figclass: align-center
 
    Hits map of deep sky survey of north celestial pole 
 
