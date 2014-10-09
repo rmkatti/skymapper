@@ -12,6 +12,8 @@ deep sky scans built on python's Numpy and Matplotlib libraries.
 
    Mollweide Projection of all-sky scan hits map for small wavelength range
 
+
+
 ..figure:: phi_365_uniform_fulllambda.png
    :align: center
    :alt: Deep Sky Scan
