@@ -4,7 +4,8 @@ skymapper
 
 
 **skymapper** is a tool for visualization and analysis of all-sky and 
-deep sky scan surveys built on python's Numpy and Matplotlib libraries.
+deep sky scan surveys. It is built on python's Numpy and Matplotlib libraries 
+and the python implementation of the HEALPIX sky discretization algorithm.
 
 
 **Hits Map of All Sky Scan (Mollweide Projection)**
