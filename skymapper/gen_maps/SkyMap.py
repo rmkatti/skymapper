@@ -1,4 +1,4 @@
-"""
+'''
 This class generates a dictionary of sky pixel coverage at each wavelength
 for a rectangular linear variable filter with two wavelength bands placed 
 symmetrically about the longer dimension. 
@@ -18,8 +18,7 @@ the origin through the FOV center
 
 Output is a dictionary with wavelengths as keys and a list of 
 sky pixel centers (theta,phi) viewed at that wavelength.
-
-"""
+'''
 
 import numpy as np
 import healpy as hp
@@ -30,30 +29,29 @@ import cPickle as pickle
 class SkyMap(object):
     
     def __init__(self, nside,LVF_theta, LVF_phi, cap_theta, Nstrips, lambda_min1, lambda_min2):
-    """
-    We initialize the FOV dimension.
+    
+        """We initialize the FOV dimension.
 
-    :param nside is a healpix parameter for discretization of the sky, nside=2**n
+        :param nside is a healpix parameter for discretization of the sky, nside=2**n
         for n=0,1,2....
 
-    :param LVF_theta, defined for LVF center located at (theta=pi/2, phi=0). Defines
+        :param LVF_theta, defined for LVF center located at (theta=pi/2, phi=0). Defines
         theta range (height) of LVF
 
-    :param LVF_phi, defined for LVF center located at (theta=pi/2, phi=0). Defines 
+        :param LVF_phi, defined for LVF center located at (theta=pi/2, phi=0). Defines 
         phi range (width) of LVF
 
-    :param cap_theta, discretizes sky on theta range [0, cap_theta]. Set cap_theta=pi for allsky    scan
+        :param cap_theta, discretizes sky on theta range [0, cap_theta]. Set cap_theta=pi for allsky    scan
 
-    :param Nstrips, defines the number of wavelength strips along the LVF_phi 
-     dimension of the LVF
+        :param Nstrips, defines the number of wavelength strips along the LVF_phi 
+         dimension of the LVF
 
-    :param lambda_min1, defines the smallest wavelength value on the first band 
-    (left side of LVF). 
+        :param lambda_min1, defines the smallest wavelength value on the first band 
+        (left side of LVF). 
     
-    :lambda_min2, defines the smallest wavlength on the second band, 
-    (middle of LVF)
-
-    """
+        :lambda_min2, defines the smallest wavlength on the second band, 
+        (middle of LVF)
+        """
 
         # Define sky pixels
         npix=12*nside**2 # number of pixels on sphere, npix=12*nside**2, nside = 2^0, 2^1, 2^2 . . .
