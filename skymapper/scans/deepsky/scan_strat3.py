@@ -1,10 +1,10 @@
 """
 Generates scan strategy 3 
+
 """
 
 import numpy as np
 from numpy import pi
-import skymapper
 from skymapper.gen_maps import SkyMap
 from skymapper.scans.deepsky.gen_deepsky import gen_strat2
 
@@ -47,6 +47,3 @@ def scan_strat3(savename):
         skymap.make_dicts(i, tuple_point)
     
     skymap.save_lambda_dict(savename)
-
-if __name__=='__main__':
-    scan_strat3("trial")

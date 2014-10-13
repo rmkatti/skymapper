@@ -1,7 +1,10 @@
-def find_missed(self, list_coords, nside, plot_type, theta_lim=pi):
+import numpy as np
+from numpy import pi
+import healpy as hp
+
+def find_missed(list_coords, nside, theta_lim=pi):
     '''list_coords is a list of tuples [(theta,phi)... ]
        nside is the resolution, of the form 2**n (usually n=8 or n=9)
-       plot_type=['deep', 'allsky']
        theta_lim (on range [0,pi]) only applicable if plot_type='deep'  '''
 
 

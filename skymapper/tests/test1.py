@@ -1,1 +1,0 @@
-import skymapper as skm
