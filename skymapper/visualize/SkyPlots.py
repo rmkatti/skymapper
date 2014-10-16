@@ -10,13 +10,11 @@ The produced visualizations are called hits maps.
 
 """
 
-
-
-import numpy as np
 import matplotlib
-import matplotlib as mpl
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
+
+import numpy as np
 from numpy import pi, cos, sin
 import collections as coll
 import cPickle as pickle

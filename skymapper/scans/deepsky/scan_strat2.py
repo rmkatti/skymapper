@@ -2,6 +2,8 @@
 Defines scan strategy 2
 
 """
+import numpy as np
+from numpy import pi
 
 def scan_strat2(savename):
     # Polar Cap theta boundary
@@ -13,7 +15,10 @@ def scan_strat2(savename):
     FOV_theta=FOV_Dim
     Nstrip=21 # Number of strips on each band of FOV 
     Nsteps= np.ceil( (2 * theta_cap1 / (FOV_phi/(Nstrip*2)) + 2*Nstrip)*2) # (Cap diameter)/(width of strip) + steps for lagging band to get across *2 for Nyquist  
-        
+
+    print Nsteps
+    raw_input("M")
+
     # Define sky pointings ( list of tuples (theta,phi,psi) )
 
     # STRATEGY 2 
@@ -40,3 +45,7 @@ def scan_strat2(savename):
         skymap.make_dicts(i, tuple_point)
     
     skymap.save_lambda_dict(savename)
+
+if __name__=='__main__':
+
+    scan_strat2('trial')

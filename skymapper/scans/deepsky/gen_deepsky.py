@@ -1,7 +1,7 @@
 import numpy as np
 from numpy import pi
 
-def gen_strat2(cent_line_dist, phi, theta_cap, Num_Points):
+def gen_deep(cent_line_dist, phi, theta_cap, Num_Points):
     """This function generates a list of pointings 
     [(theta_1,phi_1, psi=0),(theta_2,phi_2, psi=0) . . .] for input into the skymapper2 
     program
