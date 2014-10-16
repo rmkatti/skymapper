@@ -70,6 +70,26 @@ def redu_allsky(ax, redu_mat, redu_dict):
     #cb=fig.colorbar(scat) # Add colorbar
     #cb.set_label("# of Hits")
     #self.fig.set_size_inches(20.0,10.0)
+
+def subplot_proposal1(f, ax):
+    """Implements specs for the subplot proposal1. Input 3x4 subplot fig and axes handles"""
+
+    f.set_size_inches(20,10)
+    ylevel=.08
+    f.text(.11, ylevel, '3 Months', fontsize=20)
+    f.text(.355, ylevel, '6 Months', fontsize=20)
+    f.text(.605, ylevel, '9 Months', fontsize=20)
+    f.text(.86, ylevel, '1 Year', fontsize=20)
+
+    f.suptitle('All Sky Survey', fontsize=25)
+    f.tight_layout()
+    f.subplots_adjust(wspace=.075, hspace=-.4)
+
+
+
+
+
+
         
 if __name__=='__main__':
     
@@ -80,18 +100,17 @@ if __name__=='__main__':
     redu_mat1, redu_dict1 = redu_data( lambda2, .75, 5)
     
     f, ax = plt.subplots(3, 4, subplot_kw=dict(projection="mollweide"))
-    f.set_size_inches(20,10)
 
     for i in [0,1,2]:
         for j in [0,1,2,3]:
             redu_allsky(ax[i, j], redu_mat1, redu_dict1 )    
 
+    f.set_size_inches(20,10)
     ylevel=.08
     f.text(.11, ylevel, '3 Months', fontsize=20)
     f.text(.355, ylevel, '6 Months', fontsize=20)
     f.text(.605, ylevel, '1 Year', fontsize=20)
     f.text(.85, ylevel, '2 Years', fontsize=20)
-
 
     f.suptitle('Test Title', fontsize=25)
     f.tight_layout()

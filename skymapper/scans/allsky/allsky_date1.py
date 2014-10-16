@@ -3,17 +3,23 @@ First allsky survey
 
 """
 
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+
 from skymapper.visualize.SkyPlots import SkyPlots2
 from skymapper.gen_maps.SkyMap import SkyMap
 from skymapper.scans.allsky.read_in import read_in_date
+from skymapper.visualize.redundancy_funcs import *
 
 import numpy as np
 from numpy import pi
-
-import matplotlib.pyplot as plt
-
+import time
 
 def allsky_survey(pointing_file, save_suffix):
+    dir= os.path.dirname(__file__)
+    savedir = os.path.join(dir, '../../data/allsky_test/')
+
 
     # FOV Dimensions
     FOV_Dim=(2048*6.2/3600)*(pi/180) # Base Dimension
@@ -27,7 +33,15 @@ def allsky_survey(pointing_file, save_suffix):
 
     days = np.unique(pointings1[:,0])
    
+    # Initializations
     skyplot1=SkyPlots2()
+    fig_sub, ax_sub= plt.subplots(3, 4, subplot_kw=dict(projection="mollweide"))        
+    sub_ind=0
+    subplot_days=[91, 182, 273, 365]
+    plot_days=[1, 2, 91, 182, 273, 365]
+    plot_lambda_ranges=[(.75,5),(.75,.76),(1.25,1.26),(1.98,2.00)]
+
+
     for day in days:
         points_in=map(tuple, pointings1[ pointings1[:,0]==day, 1:4] )
 
@@ -35,29 +49,39 @@ def allsky_survey(pointing_file, save_suffix):
             print "day:%s, step:%s" %(day, i)
             skymap.make_dicts(day, tupler )
 
-        fig2, ax2= plt.subplots(2,2)
-        mult_ind=0
-        #plot_days=[1,2, 91, 182, 273, 365] :
-        plot_days=[1,2,3,4]
-        plot_lambda_ranges=[(.75,5),(.75,.76),(1.25,1.26),(1.98,2.00)]
-
-        if day in plot_days :
+        if day in plot_days:
             for j,tupler in enumerate(plot_lambda_ranges):
-                #fig1=plt.figure()
-                skyplot1.redundancy_plot(skymap.lambda_dict, radius_line=pi, lambda_min=tupler[0] ,lambda_max=tupler[1],plot_type='allsky', plot_title="All Sky Hits Map: [%s, %s]" %(tupler[0], tupler[1]) )        
+                fig1, ax1= plt.subplots(1,1, subplot_kw=dict(projection="mollweide"))        
+                redu_mat2, redu_dict2 = redu_data(skymap.lambda_dict, lambda_min=tupler[0] ,lambda_max=tupler[1])
+                redu_allsky( ax1, redu_mat2, redu_dict2)
+
+                fig1.set_size_inches(20,10)
+                fig1.suptitle("All Sky Hits Map: [%s, %s]" %(tupler[0], tupler[1]) )        
+
                 savename2="allsky_test2_%s_%s" %(day,tupler)
-                plt.savefig( "/home/rmkatti/skymapper/skymapper/data/allsky_time/%s.png" %(savename2) )   
+                plt.savefig( savedir + "%s.png" %(savename2) )   
 
-                if (day in [1,2,3,4]) and (j==0):
-                    ax2[mult_ind]=plt.gca()
-                    mult_ind+=1   
 
-    fig2.savefig( "/home/rmkatti/skymapper/skymapper/data/allsky_time/%s.png" %("MultiPanel") )   
+        if day in subplot_days:
+            redu_mat1, redu_dict1=redu_data(skymap.lambda_dict, .75, 5)
+            for j in [0,1,2]:
+                redu_allsky( ax_sub[j,sub_ind], redu_mat1, redu_dict1)
+            sub_ind+=1
+
+    subplot_proposal1( fig_sub, ax_sub)
+    fig_sub.savefig( savedir + "%s.png" %("MultiPanel") )   
+    
+    # Save Dictionary
     skymap.save_lambda_dict(save_suffix)
 
  
 if __name__=='__main__':
 #    allsky_survey('/home/rmkatti/skymapper/skymapper/data/all_sky_days.txt', 'test_out')
 #    allsky_survey('/home/rmkatti/skymapper/skymapper/data/test_2000', 'test_out')
-    allsky_survey('/home/rmkatti/skymapper/skymapper/data/test_data_2', 'test_out')
-    
+    dir= os.path.dirname(__file__)    
+    pointfile = os.path.join(dir, '../../data/test_data_3')
+
+    time1=time.time()
+    allsky_survey( pointfile, 'test_out2')
+    time2=time.time()
+    print "Time Elapsed: %s" %(time2-time1)
