@@ -66,6 +66,8 @@ def redu_allsky(ax, redu_mat, redu_dict):
   
     ax.grid(True)
 
+    return scat, Nhits
+
     #plt.title(plot_title + "; Total Hits %s" %(Nhits), y=1.06, color='b')
     #cb=fig.colorbar(scat) # Add colorbar
     #cb.set_label("# of Hits")

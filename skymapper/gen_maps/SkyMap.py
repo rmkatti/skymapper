@@ -24,7 +24,8 @@ import numpy as np
 import healpy as hp
 from numpy import pi, cos, sin
 import cPickle as pickle
-
+from skymapper.gen_maps.lambda_set import *
+import time
 
 class SkyMap(object):
     
@@ -69,6 +70,9 @@ class SkyMap(object):
         self.lambda_min2=lambda_min2
  
         # LVF theta and phi bounds
+        self.LVF_theta_dim= LVF_theta
+        self.LVF_phi_dim= LVF_phi
+
         self.theta_low=pi/2-LVF_theta/2
         self.theta_hi=pi/2+LVF_theta/2
         self.phi_low=2*pi-LVF_phi/2
@@ -92,8 +96,23 @@ class SkyMap(object):
         # (x=1,y=0,z=0)=(thetac_new=pi/2, phic_new=0), R1inv is the inverse 
         #matrix
 
+        
+        cutoff_dim = max(self.LVF_theta_dim, self.LVF_phi_dim)
+        upper_theta= theta+1.5*cutoff_dim
+        lower_theta= theta-1.5*cutoff_dim
+
+        sky_pixels_in = self.sky_pixels[ ( self.sky_pixels[:,0]<upper_theta) & (self.sky_pixels[:,0]>lower_theta) ]
+     
+        if  (30.0*pi/180 < theta < 150.0*pi/180.0) & (pi/4< phi < 7*pi/4):
+            upper_phi= phi + 1.5*cutoff_dim
+            lower_phi= phi - 1.5*cutoff_dim
+            sky_pixels_in = self.sky_pixels[ (self.sky_pixels[:,1] < upper_phi) & (self.sky_pixels[:,1] > lower_phi)  ]
+
         R1, R1inv= self.rot_matrix(theta,phi,psi)
-        self.rot_sky_pixels=np.array(self.rotate(self.sky_pixels, R1)) # Rotated sky pixels
+        
+        self.rot_sky_pixels=np.array(self.rotate(sky_pixels_in, R1)) # Rotated sky pixels
+        time2=time.time()
+        
 
         # Make dictionary of rotated pixel pointings. For a given theta, 
         # gives the list of phi values associated with that theta
@@ -108,11 +127,13 @@ class SkyMap(object):
     
         self.rot_sky_pixels = np.append(vec1,vec2, axis=0)
        
-        lambda_band1=[self.lambda_min1*(1+1.0/41.5)**n for n in range(self.Nstrips)]
-        phi_band1 = np.linspace(self.phi_low, 2*pi, self.Nstrips+1)
+        lambda_band1= gen_lambda(lambda_min=.75, lambda_max=1.32, R=41.5)
+        Num_strip_1=len(lambda_band1) 
+        phi_band1 = np.linspace(self.phi_low, 2*pi, Num_strip_1+1)
  
-        lambda_band2=[self.lambda_min2*(1+1.0/40.0)**n for n in range(self.Nstrips)]
-        phi_band2 = np.linspace(0, self.phi_hi, self.Nstrips+1)
+        lambda_band2= gen_lambda(lambda_min=1.32, lambda_max=2.34, R=41.5)
+        Num_strip_2=len(lambda_band2)
+        phi_band2 = np.linspace(0, self.phi_hi, Num_strip_2+1)
  
         for i, lambdai in enumerate(lambda_band1):
             phi_mini = phi_band1[i]  
@@ -123,7 +144,14 @@ class SkyMap(object):
                 list_list=[]
             else:
                 list_list=self.rotate(datain, R1inv).tolist()
-            self.lambda_dict.setdefault(lambdai,[]).extend(  [(item[0], item[1]) for item in list_list]) 
+            self.lambda_dict.setdefault(lambdai,[]).extend( map(tuple,list_list) ) 
+
+
+       # lam/del_lam=R
+       # lam/R = del_lam
+       # lambda2=lambda1+lambda1/R
+       # lambda3=lambda2+lambda2/R
+       #        =lambda1+lambda1/R + (lambda1+lambda1/R)/R  
   
         for i, lambdai in enumerate(lambda_band2):
             phi_mini = phi_band2[i]
@@ -134,7 +162,7 @@ class SkyMap(object):
        	       	list_list=[]
        	    else:
       	       	list_list=self.rotate(datain, R1inv).tolist()
-            self.lambda_dict.setdefault(lambdai,[]).extend(  [(item[0], item[1]) for item in list_list])
+            self.lambda_dict.setdefault(lambdai,[]).extend(  map(tuple, list_list) )
                 
         # Check Values and add wavelenghth value to lambda_list
              
