@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 import cPickle as pickle
 import numpy as np
-from numpy import pi
+from numpy import pi, sin
 import os
 import collections as coll
 
@@ -32,6 +32,7 @@ def redu_deepsky(ax, redu_mat, redu_dict, radius_line=5*pi/180):
     '''Plot deepsky redundancy map. Input axis should be type polar.'''
      # Define colormap
     cmap = plt.cm.jet
+    Nhits= sum(redu_dict.values())       
 
         # Plot data
     phi_list= redu_mat[:,1]
@@ -43,10 +44,10 @@ def redu_deepsky(ax, redu_mat, redu_dict, radius_line=5*pi/180):
     phi_rad_plot= np.arange(0,2*pi,.01)
     rad_plot = [sin(radius_line)]*len(phi_rad_plot)
     rad_plotter = ax.plot(phi_rad_plot , rad_plot, color='m', linewidth=1)
-    ax.annotate('dec=%.2f$^\circ$'%(90-radius_line*180/pi), xy=(-pi/2,sin(radius_line)), xytext=(0.4, 0.2), textcoords='figure fraction', arrowprops=dict(facecolor='green',
-	     shrink=.05),bbox=dict(facecolor='blue',alpha=.3) )
+    #ax.annotate('dec=%.2f$^\circ$'%(90-radius_line*180/pi), xy=(-pi/2,sin(radius_line)), xytext=(0.4, 0.2), textcoords='figure fraction', arrowprops=dict(facecolor='green',
+    #     shrink=.05),bbox=dict(facecolor='blue',alpha=.3) )
     ax.set_rgrids(radii=[ sin(theta) for theta in np.linspace(pi/64,pi/16,3)],labels=90-np.linspace(pi/64,pi/16,3)*180/pi, angle=80, color='DarkOrange',size='medium')
-            
+    return scat, Nhits       
 
 def redu_allsky(ax, redu_mat, redu_dict):
     '''Plot all-sky redundancy. ax should be given as a mollweide projection'''

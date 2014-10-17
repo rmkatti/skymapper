@@ -29,7 +29,7 @@ import time
 
 class SkyMap(object):
     
-    def __init__(self, nside,LVF_theta, LVF_phi, cap_theta, Nstrips, lambda_min1, lambda_min2):
+    def __init__(self, nside,LVF_theta, LVF_phi, cap_theta):
     
         """We initialize the FOV dimension.
 
@@ -44,14 +44,6 @@ class SkyMap(object):
 
         :param cap_theta, discretizes sky on theta range [0, cap_theta]. Set cap_theta=pi for allsky    scan
 
-        :param Nstrips, defines the number of wavelength strips along the LVF_phi 
-         dimension of the LVF
-
-        :param lambda_min1, defines the smallest wavelength value on the first band 
-        (left side of LVF). 
-    
-        :lambda_min2, defines the smallest wavlength on the second band, 
-        (middle of LVF)
         """
 
         # Define sky pixels
@@ -65,10 +57,6 @@ class SkyMap(object):
             raise TypeError("sky_pixels empty")
             #theta_vals on [0,pi], phi_vals on [0,2*pi]
 
-        self.Nstrips=Nstrips      
-        self.lambda_min1=lambda_min1
-        self.lambda_min2=lambda_min2
- 
         # LVF theta and phi bounds
         self.LVF_theta_dim= LVF_theta
         self.LVF_phi_dim= LVF_phi
