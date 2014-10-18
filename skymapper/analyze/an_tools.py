@@ -45,3 +45,57 @@ def find_missed(list_coords, nside, theta_lim=pi):
 
     return final_out
 
+
+def lam_dict_to_array(lambda_dict1):
+    '''This function converts a dictionary {lambda1:[(theta1_1,phi_1_2)]...}
+    to a numpy array with col1 theta, col2 phi, col3 lambda1 hits . . . '''
+
+    list_pix_centers=itertools.chain(*lambda_dict1.values())
+    unique_centers=list(set(list_pix_centers))
+    
+    row_dim = len(list_pix_centers)
+    col_dim = len(lambda_dict1.keys())
+    out_array=np.zeros([row_dim, col_dim])
+    arr_len=0
+ 
+    # Generate sparse output array
+    for num, lambdai in enumerate(sort(lambda_dict1.keys())):
+
+        listi=lambda_dict1[lambdai] 
+        hits_dict=Counter(listi)
+        delta=len( hits_dict.keys() )
+
+        start= array_len
+        end=  array_len+delta
+
+        out_array[start:end,:2]= np.asarray( hits_dict.keys() )
+        out_array[start:end, num+2]= np.asarray( hits_dict.values() )
+        
+        arr_len=end
+
+    out_array=out_array[:arr_len]
+    out_array=np.round(out_array,7)
+
+    # Simplify array
+
+    simp_array=np.zeros([len(unique_centers), col_dim])
+
+    for i, tupler in enumerate(unique_centers):
+        theta= tupler[0]
+        phi= tupler[1]
+        delta_array= out_array[ (out_array[:,0]==np.round(theta,7) ) & ( out_array[:,1]==np.round(phi,7)) ]
+        delta_array= delta_array[:, 2:]
+
+        delta_array.sum(axis=0)
+        simp_array[i,:] = 
+
+
+  
+# For each lambda in dictionary, get lambda_dict[lambda_i]= [(theta,phi)...]=list1
+
+
+def 
+
+if __name__=='__main__':
+
+    lambda2={.75:[(),(),()], .76:[(),(),(),(),(),(),(),()], .77:[(),(),(),()]}
