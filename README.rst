@@ -27,10 +27,10 @@ and the python implementation of the HEALPIX sky discretization algorithm.
 
    ..
    
-Developing coverage maps requires defining field-of-view (FOV) dimensions, inputing a list of pointing directions 
-in tuples of (theta, phi, ax), i.e. polar angle, azimuthal angle, and axial angle, and defining the FOV wavelength ranges.
-Current implementation defines FOV dimension as rectangular 2:1 azimuthal-to-polar dimensions, with wavelenght 
-changing across azimuthal direction of sensitivity R. Output is a dictionary with wavelength values as keys and 
+Coverage map development requires defining field-of-view (FOV) dimensions, inputing list of pointing directions 
+as tuples of (theta, phi, ax), i.e. polar angle, azimuthal angle, and axial angle, and defining the FOV wavelength ranges.
+Current implementation defines FOV dimension as a rectangular, 2:1 azimuthal-to-polar linear variable filter with wavelength 
+changing across azimuthal direction as sensitivity R (input parameter). Output is a dictionary with wavelength values as keys and 
 pixel centers (theta, phi) as values.
 
 Visualization allows two types of coverage maps. Sky regions, collections of sky pixels discretized by HEALPIX algorithm,
