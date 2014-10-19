@@ -91,9 +91,15 @@ def gen_deepskydate1_points():
     cent_line_dist= FOV_Dim/2.0
     out_line_dist= (3.0/2)*FOV_Dim
 
-    Num_long=24
-    Num_out=6
+    #Num_long=24
+    #Num_out=6
+    #theta_long_1=FOV_Dim
+    #theta_long_2=-FOV_Dim
+    #theta_out_1= 3*Strip_width
+    #theta_out_2=-3*Strip_width
 
+    Num_long=1
+    Num_out=0
     theta_long_1=FOV_Dim
     theta_long_2=-FOV_Dim
     theta_out_1= 3*Strip_width
@@ -101,8 +107,9 @@ def gen_deepskydate1_points():
 
     point_matr=np.array([])
 
-#    days= range(1,366)
-    days=[1,2,3,4,5,6,7,8,9,10]
+    #days= range(1,366)
+    #days=[1,2,3,4,5,6,7,8,9,10]
+    days=[1]
     for day in days:
 
         phi= day*2*pi/len(days)
