@@ -34,13 +34,13 @@ changing across azimuthal direction as sensitivity R (input parameter). Output i
 pixel centers (theta, phi) as values.
 
 Visualization allows two types of coverage maps. Sky regions, collections of sky pixels discretized by HEALPIX algorithm,
-viewed multiple are colored corresponding to an increasing viewing redundancy. The all sky map is a Mollweide 
-projection (upper picture), and the deep sky map centered around the celestial north pole is a radial projection for
+viewed multiple times are colored corresponding to an increasing viewing redundancy. The all-sky map is a Mollweide 
+projection (upper picture), and the deep-sky map centered around the celestial north pole is a radial projection for
 small angles about the pole. 
 
-Analysis identifies areas of missed sky coverage at defined wavelength ranges. Wavelength dictionaries may be converted 
-easily to 2D numpy arrays with pixel centers as first two columns, viewing wavelengths as remaining columns, and array
-values being redundancy information of sky pixel redundancy at each wavelength. Radial histograms allow binning sky
+Analysis identifies areas of missed sky coverage at input wavelength ranges. Wavelength dictionaries may be converted 
+easily to 2D numpy arrays with pixel centers in first two columns, viewing wavelengths as remaining columns, and array
+values being redundancy information of a given sky pixel at a particular wavelength. Radial histograms allow binning sky
 pixels by radial distance from north celestrial pole for input observing wavelength.
 
 
