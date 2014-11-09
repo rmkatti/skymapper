@@ -5,6 +5,7 @@ import itertools
 from collections import Counter
 import cPickle as pickle
 import time
+import scipy.stats as scistat
 
 def find_missed(list_coords, nside, theta_lim=pi):
     '''list_coords is a list of tuples [(theta,phi)... ]
@@ -49,6 +50,47 @@ def find_missed(list_coords, nside, theta_lim=pi):
 
     return final_out
 
+def mean_colormap(array1):
+    '''Outputs a useful colormap based on mean of wavelengths'''
+
+    arr1=array1[:,3:]
+    c=np.mean(arr1, axis=1)
+    return array1[:,0], array1[:,1], c
+
+
+def std_colormap(array1):
+    '''Outputs a useful colormap based on std of wavelengths'''
+
+    arr1=array1[:,3:]
+    c=np.std(arr1, axis=1)
+    return array1[:,0], array1[:,1], c
+
+def FOM_2(array1):
+
+    Nhits = np.sum(array1[:,2])
+    min_sum = np.sum( np.amin(array1[:,3:], axis=1) )
+    Num_channels = len(array1[0,3:])
+    Eff= Num_channels*min_sum / np.float(Nhits)
+
+    Area_unnormed= np.sum( ((180/pi)*array1[:,0])**2 * np.amin(array1[:,3:], axis=1) )
+    Area_normed= Area_unnormed / np.float(min_sum)
+    #Area_norm_degree=Area_normed*(180/pi)**2
+
+    n_dense_degree = Eff*(np.float(Nhits)/Num_channels)/Area_normed
+
+    FOM_2=Eff/np.sqrt(Area_normed)
+
+    return (FOM_2, n_dense_degree, Eff, Area_unnormed,Area_normed, min_sum, Nhits, Num_channels)
+
+
+def histogram_pixel(row_id, array1):
+
+    lambdas=array1[row_id][3:]
+    ret_mat=scistat.itemfreq(lambdas)
+
+    return ret_mat[:,0], ret_mat[:,1]
+
+
 
 def lam_dict_to_array(lambda_dict1):
     '''This function converts a dictionary {lambda1:[(theta1_1,phi_1_2)]...}
@@ -59,13 +101,13 @@ def lam_dict_to_array(lambda_dict1):
     
     row_dim = len(list_pix_centers)
     col_dim = 2+len(lambda_dict1.keys())
-    out_array=np.zeros([row_dim, col_dim])
+    out_array=np.zeros([row_dim, col_dim], dtype=np.float32)
     array_len=0
     
-
+    
     # Generate sparse output array
     for num, lambdai in enumerate(sorted(lambda_dict1.keys())):
-
+        
         listi=lambda_dict1[lambdai] 
         hits_dict=Counter(listi)
         delta=len( hits_dict.keys() )
@@ -78,37 +120,87 @@ def lam_dict_to_array(lambda_dict1):
         
         array_len=end
 
+        timei_1= time.time()
+        
+    
     out_array=out_array[:array_len]
     out_array=np.round(out_array,7)
+    
+    
     # Simplify array
+    time1=time.time()
 
-    simp_array=np.zeros([len(unique_centers), col_dim+1])
+    ind_in=out_array[:,:2]
+    join_row = np.ascontiguousarray(ind_in).view( np.dtype( (np.void,\
+             ind_in.dtype.itemsize * ind_in.shape[1] )))
+    _, unique_rows, indices= np.unique(join_row, return_index=True, return_inverse=True)
 
-    for i, tupler in enumerate(unique_centers):
-        theta= tupler[0]
-        phi= tupler[1]
+    time2=time.time()
+    print "Time of array blocks ", time2-time1
 
-        delta_array= out_array[ (out_array[:,0]==np.round(theta,7) ) & ( out_array[:,1]==np.round(phi,7)) ]
-        delta_array= delta_array[:, 2:]
-        sum_list=delta_array.sum(axis=0)
-        Nhits= np.array([sum_list.sum()])
+    simp_array=np.zeros([len(unique_rows), col_dim+1])
 
-        if not Nhits>0:
-           raise ValueError("Nhits=%s" %(Nhits))
+    print len(set(indices))   
+    timei=time.time()
+
+    for i, val in enumerate(set(indices)):
+
+        theta_phi=out_array[indices==val][0,0:2]
+        summed_lambda=np.sum(out_array[indices==val][:,2:], axis=0)
+        N_pix = np.array([sum(summed_lambda)])
+        simp_array[i]=np.concatenate((theta_phi, N_pix, summed_lambda))
+           
+        if i%1000==0:
+            time_i1=time.time()
+            print i, time_i1-timei
+            timei=time.time()
+
+ #   for i, val in enumerate(unique_rows):
+ #       time1=time.time()
+
         
-        simp_array[i,:] = np.concatenate( (np.asarray(tupler), Nhits, sum_list) ) 
+        #theta= tupler[0]
+        #phi= tupler[1]
+
+        #delta_array= out_array[ (out_array[:,0]==np.round(theta,7) ) & ( out_array[:,1]==np.round(phi,7)) ]
+        #delta_array= delta_array[:, 2:]
+        #sum_list=delta_array.sum(axis=0)
+        #Nhits= np.array([sum_list.sum()])
+
+        #if not Nhits>0:
+        #   raise ValueError("Nhits=%s" %(Nhits))
+        
+        #simp_array[i,:] = np.concatenate( (np.asarray(tupler), Nhits, sum_list) ) 
+        #time2=time.time()
+        #print time2-time1
 
     return simp_array
-  
+
+def save_converted_array(array1, array_savename ):
+
+    np.save(array_savename, array1)  
+
 
 if __name__=='__main__':
 
     #lambda2={.75:[(0,1),(0,1),(1,2)], .76:[(0,1),(0,1),(3,4),(3,4),(3,4),(4,5),(4,5)], 
     #.77:[(0,1),(1,2),(4,5),(6,7)]}
-    time1= time.time()
-    lambda2=pickle.load(open("lambda_dict_deep_test","rb"))
-    time2=time.time()
 
-    array2=lam_dict_to_array(lambda2)
-    np.savetxt('array_file', array2, delimiter=', ' )
-    print "Time Elapsed: %s" %(time2-time1)    
+    #time5= time.time()
+    #lambda2=pickle.load(open("lambda_dict_deep_test","rb"))
+    #time6=time.time()
+    #print "Open file: %s" %(time6-time5)    
+
+    #array2=lam_dict_to_array(lambda2)
+    #np.savetxt('array_file', array2, delimiter=', ' )
+    #time7=time.time()
+    #print "Full Program Time: ", time7-time5
+
+    array_savename='test_array'
+    dict1 = {1:[(pi/8,pi/2),(pi/8,pi/2),(pi/8,pi/2),(pi/8,pi/4),(pi/8,pi/8)], 2: [(pi/8,pi/2),(pi/8,pi/4),(pi/8,pi/4),(pi/8,pi/3)], 3:[(pi/8,pi/2),(pi/8,pi/2),(pi/8,pi/4),(pi/5,pi/3)]}
+    array1=lam_dict_to_array(dict1)
+    save_converted_array(array1, array_savename )
+    print array1
+    out_tuple = FOM_2(array1)
+
+    print "out_tuple", out_tuple

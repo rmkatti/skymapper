@@ -17,10 +17,10 @@ import numpy as np
 from numpy import pi
 import time
 
-def deepsky_date_survey(save_suffix):
+def deepsky_date_survey(path, modifier):
 
     dir= os.path.dirname(__file__)
-    savedir = os.path.join(dir, '../../data/deepsky_test/')
+    savedir = os.path.join(dir, path)
 
 
     # FOV Dimensions
@@ -42,11 +42,11 @@ def deepsky_date_survey(save_suffix):
     skyplot1=SkyPlots2()
     fig_sub, ax_sub= plt.subplots(1, 4, subplot_kw=dict(polar=True))        
     sub_ind=0
-#    subplot_days=[1, 91, 182, 365]
-    subplot_days=[1,3,7,10]
-#    plot_days=[1,3, 45, 91, 130, 182, 230, 290, 365]
-    plot_days=[1,2,3,7,10]
-    plot_lambda_ranges=[(.75,2.34),(.75,.76),(1.30,1.33),(2.33,2.34)]
+    subplot_days=[1, 91, 182, 365]
+    #subplot_days=[1,3,7,10]
+    plot_days=[1,3, 45, 91,  182, 290, 365]
+    #plot_days=[1,2,3,7,10]
+    plot_lambda_ranges=[(.75,2.34),(.75,.76),(1.30,1.33),(2.26,2.34)]
 
 
     for day in days:
@@ -67,7 +67,7 @@ def deepsky_date_survey(save_suffix):
                 fig1.set_size_inches(20,10)
                 fig1.suptitle("Day %s, Nhits=%s, [%s, %s]" %(day, Nhits, tupler[0], tupler[1]) )        
 
-                savename2="deepsky_time_%s_%s" %(day,tupler)
+                savename2="%s_%s_%s" %(modifier, day,tupler)
                 plt.savefig( savedir + "%s.png" %(savename2) )   
 
 
@@ -77,17 +77,17 @@ def deepsky_date_survey(save_suffix):
             sub_ind+=1
 
     subplot_proposal1( fig_sub, ax_sub)
-    fig_sub.savefig( savedir + "%s.png" %("MultiPanel_deep_1") )   
+    fig_sub.savefig( savedir + "%s_%s.png" %(modifier,"MultiPanel") )   
     
     # Save Dictionary
-    skymap.save_lambda_dict(save_suffix)
+    skymap.save_lambda_dict(modifier)
 
 def gen_deepskydate1_points():
 
     FOV_Dim=(2048*6.2/3600)*(pi/180) # Base Dimension
     FOV_phi=FOV_Dim*2
     FOV_theta=FOV_Dim
-    Strip_width= FOV_Dim/24.5
+    Strip_width= FOV_Dim/24.0
     cent_line_dist= FOV_Dim/2.0
     out_line_dist= (3.0/2)*FOV_Dim
 
@@ -98,8 +98,8 @@ def gen_deepskydate1_points():
     #theta_out_1= 3*Strip_width
     #theta_out_2=-3*Strip_width
 
-    Num_long=1
-    Num_out=0
+    Num_long=24.0
+    Num_out=6.0
     theta_long_1=FOV_Dim
     theta_long_2=-FOV_Dim
     theta_out_1= 3*Strip_width
@@ -107,9 +107,9 @@ def gen_deepskydate1_points():
 
     point_matr=np.array([])
 
-    #days= range(1,366)
+    days= range(1,366)
     #days=[1,2,3,4,5,6,7,8,9,10]
-    days=[1]
+    #days=[1,2,3]
     for day in days:
 
         phi= day*2*pi/len(days)
@@ -133,6 +133,10 @@ def gen_deepskydate1_points():
 if __name__=='__main__':
 
     time1=time.time()
-    deepsky_date_survey( 'deep_test')
+    path1='../../data/deepsky_test/date1_redo/'
+    modifier1= 'deepsky_date1_redo' 
+    deepsky_date_survey(path=path1, modifier=modifier1)
+
+    
     time2=time.time()
     print "Time Elapsed: %s" %(time2-time1)

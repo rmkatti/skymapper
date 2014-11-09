@@ -24,7 +24,7 @@ import numpy as np
 import healpy as hp
 from numpy import pi, cos, sin
 import cPickle as pickle
-from skymapper.gen_maps.lambda_set import *
+from skymapper.gen_maps.lambda_set_2 import *
 import time
 
 class SkyMap(object):
@@ -115,15 +115,14 @@ class SkyMap(object):
     
         self.rot_sky_pixels = np.append(vec1,vec2, axis=0)
        
-        lambda_band1= gen_lambda(lambda_min=.75, lambda_max=1.32, R=41.5)
-        Num_strip_1=len(lambda_band1) 
-        phi_band1 = np.linspace(self.phi_low, 2*pi, Num_strip_1+1)
- 
-        lambda_band2= gen_lambda(lambda_min=1.32, lambda_max=2.34, R=41.5)
-        Num_strip_2=len(lambda_band2)
-        phi_band2 = np.linspace(0, self.phi_hi, Num_strip_2+1)
- 
-        for i, lambdai in enumerate(lambda_band1):
+        # Define lambda and phi edges
+        lambda_band1= gen_lambda(lambda_min=.75, lambda_max=1.32, R=41.95625926211772)
+        phi_band1 = np.linspace(self.phi_low, 2*pi, 25)
+         
+        lambda_band2= gen_lambda(lambda_min=1.32, lambda_max=2.34, R=41.95625926211772)
+        phi_band2=np.linspace(0,self.phi_hi, 25)
+     
+        for i, lambdai in enumerate(lambda_band1[:-1]):
             phi_mini = phi_band1[i]  
             phi_maxi = phi_band1[i+1]
 
@@ -141,7 +140,7 @@ class SkyMap(object):
        # lambda3=lambda2+lambda2/R
        #        =lambda1+lambda1/R + (lambda1+lambda1/R)/R  
   
-        for i, lambdai in enumerate(lambda_band2):
+        for i, lambdai in enumerate(lambda_band2[:-1]):
             phi_mini = phi_band2[i]
             phi_maxi = phi_band2[i+1]       
 

@@ -48,6 +48,7 @@ def moll_plot_points(list_points, plot_title, savename):
     plt.savefig(savename+".png" )
 
 
+
 if __name__=='__main__':
     moll_plot_points(list_points=[(theta,phi) for theta in np.linspace(0,pi,20) 
     for phi in np.linspace(0,2*pi,5) ], plot_title="Test", savename='test' )

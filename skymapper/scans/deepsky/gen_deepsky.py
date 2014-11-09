@@ -106,7 +106,7 @@ def gen_deep3(cent_line_dist, phi, theta1, theta2, Num_Points):
         r=(x_rot**2 + y_rot**2)**.5
         theta_out=np.arcsin(r)
       
-        if not 0 < theta_out < pi/2:
+        if not 0 <= theta_out <= pi/2:
             raise ValueError("theta_out not between 0 and pi/2. theta_out=%s" %(theta_out))
 
         phi_out=np.arctan2(y_rot,x_rot)

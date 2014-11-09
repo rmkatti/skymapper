@@ -37,6 +37,9 @@ def read_in_date(pointing_file):
     pointings1 = np.append(pointings1,np.zeros((pointings1.shape[0],1)),1)
     pointings1 = pointings1[:,[0,2,1,3]]    
     
+    pointings1[:,2] = np.mod( pointings1[:,2] + 30, 360) - 180.0
+
+    #pointings1=pointings1[ np.absolute(pointings1[:,2])<5 ]
 
     # Set theta
     pointings1[:,1:3]*=pi/180.0
