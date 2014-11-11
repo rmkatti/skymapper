@@ -19,6 +19,10 @@ the origin through the FOV center
 Output is a dictionary with wavelengths as keys and a list of 
 sky pixel centers (theta,phi) viewed at that wavelength.
 '''
+import matplotlib
+matplotlib.use('agg')
+import matplotlib.pyplot as plt
+
 
 import numpy as np
 import healpy as hp
@@ -26,8 +30,10 @@ from numpy import pi, cos, sin
 import cPickle as pickle
 from skymapper.gen_maps.lambda_set_2 import *
 import time
+from skymapper.gen_maps.SkyData import SkyData
+from skymapper.visualize.plot_points import moll_plot
 
-class SkyMap(object):
+class SkyMap2(object):
     
     def __init__(self, nside,LVF_theta, LVF_phi, cap_theta):
     
@@ -50,12 +56,19 @@ class SkyMap(object):
         npix=12*nside**2 # number of pixels on sphere, npix=12*nside**2, nside = 2^0, 2^1, 2^2 . . .
         ind=np.arange(npix) # index of pointings
         pix_array=np.array( hp.pix2ang(nside, ind)).T # Unrotated sky pixels
-
         self.sky_pixels= pix_array[ pix_array[:,0]<= cap_theta ]
        
-        if self.sky_pixels == []:
+        if self.sky_pixels.size==0:
             raise TypeError("sky_pixels empty")
             #theta_vals on [0,pi], phi_vals on [0,2*pi]
+         
+        # Define lambdas
+        lambda_band1= gen_lambda(lambda_min=.75, lambda_max=1.32, R=41.95625926211772)
+        lambda_band2= gen_lambda(lambda_min=lambda_band1[-1], lambda_max=2.34, R=41.95625926211772)
+        lambda_in= np.around(np.asarray(lambda_band1[:-1]+lambda_band2[:-1]),5)
+
+        in_arr=np.around(pix_array[ pix_array[:,0]<= cap_theta ],5)
+        self.skydata=SkyData(in_arr[:,0], in_arr[:,1], lambda_in)      
 
         # LVF theta and phi bounds
         self.LVF_theta_dim= LVF_theta
@@ -68,8 +81,8 @@ class SkyMap(object):
 
         # rotated coordinates and dictionaries to be defined by make_dicts
         self.rot_sky_pixels=[]
-    	self.lambda_dict={} # Key: Values:
-       
+               
+
     def make_dicts(self, pointID, pointing):
         '''Takes a pointID (usually a integer) and a single pointing (tuple of 
         pointing angles (theta,phi,psi)) and updates the self.* dictionaries 
@@ -116,46 +129,63 @@ class SkyMap(object):
         self.rot_sky_pixels = np.append(vec1,vec2, axis=0)
        
         # Define lambda and phi edges
-        lambda_band1= gen_lambda(lambda_min=.75, lambda_max=1.32, R=41.95625926211772)
+        lambda_band1= np.around(np.asarray(gen_lambda(lambda_min=.75, lambda_max=1.32, R=41.95625926211772)),5)
         phi_band1 = np.linspace(self.phi_low, 2*pi, 25)
          
-        lambda_band2= gen_lambda(lambda_min=1.32, lambda_max=2.34, R=41.95625926211772)
+        lambda_band2= np.around(np.asarray(gen_lambda(lambda_min=lambda_band1[-1], lambda_max=2.34, R=41.95625926211772)),5)
         phi_band2=np.linspace(0,self.phi_hi, 25)
+
+        out_arr1=np.array([])
      
         for i, lambdai in enumerate(lambda_band1[:-1]):
             phi_mini = phi_band1[i]  
             phi_maxi = phi_band1[i+1]
 
             datain = self.rot_sky_pixels[(self.rot_sky_pixels[:,1] < phi_maxi) & (self.rot_sky_pixels[:,1] >= phi_mini)]
+
             if np.size(datain)==0:
-                list_list=[]
+                list_list=np.array([])
             else:
-                list_list=self.rotate(datain, R1inv).tolist()
-            self.lambda_dict.setdefault(lambdai,[]).extend( map(tuple,list_list) ) 
+                list_list=np.around(self.rotate(datain, R1inv),5)
+                           
 
-
-       # lam/del_lam=R
-       # lam/R = del_lam
-       # lambda2=lambda1+lambda1/R
-       # lambda3=lambda2+lambda2/R
-       #        =lambda1+lambda1/R + (lambda1+lambda1/R)/R  
+                interim_arr= np.empty([list_list.shape[0],3]) 
+                interim_arr[:,:2]= list_list
+                interim_arr[:,2]= np.ones(interim_arr.shape[0])*lambdai    
+                if out_arr1.size==0:
+                    out_arr1=interim_arr
+                else:
+                    out_arr1=np.concatenate((out_arr1, interim_arr),axis=0)
+             
+        out_arr2=np.array([])
   
         for i, lambdai in enumerate(lambda_band2[:-1]):
             phi_mini = phi_band2[i]
             phi_maxi = phi_band2[i+1]       
 
             datain = self.rot_sky_pixels[(self.rot_sky_pixels[:,1] < phi_maxi) & (self.rot_sky_pixels[:,1]>= phi_mini)]
-     	    if np.size(datain)==0:
-       	       	list_list=[]
-       	    else:
-      	       	list_list=self.rotate(datain, R1inv).tolist()
-            self.lambda_dict.setdefault(lambdai,[]).extend(  map(tuple, list_list) )
-                
+
+            if np.size(datain)==0:
+                list_list=np.array([])
+            else:
+                list_list=np.around(self.rotate(datain, R1inv),5)
+
+                interim_arr= np.empty([list_list.shape[0],3])
+                interim_arr[:,:2]= list_list
+                interim_arr[:,2]= np.ones(interim_arr.shape[0])*lambdai
+ 
+                if out_arr2.size==0:
+                    out_arr2=interim_arr
+                else:
+                    out_arr2=np.concatenate((out_arr2, interim_arr),axis=0)
+
+        out_arr = np.concatenate((out_arr1,out_arr2),axis=0)
+        out_arr=out_arr[ (out_arr[:,0]<pi) & (out_arr[:,1]<2*pi)] # Needs to be fixed
+        self.skydata.increment_hit(map(tuple,out_arr))
+
+
         # Check Values and add wavelenghth value to lambda_list
              
-    def save_lambda_dict(self, name_mod):
-        pickle.dump(self.lambda_dict, open("lambda_dict_%s" % name_mod,'w'))
-  
     def rotate(self, data, rot_mat):
         '''Input polar (theta), azimuthal (psi), axial (psi) angles. Outputs rotated coordinates '''
         data_rot=np.empty_like(data)
@@ -235,4 +265,42 @@ class SkyMap(object):
                 phi += 2*pi
             return theta,phi 
 
+    def least_hits(self):
 
+        return self.skydata.least_hits_array()
+
+    def sum_hits(self):
+
+        return self.skydata.sum_hits_array()
+
+
+if __name__=='__main__':
+    FOV_Dim=(2048*6.2/3600)*(pi/180) # Base Dimension
+    FOV_phi=FOV_Dim*2
+    FOV_theta=FOV_Dim
+
+    pointings=[(theta,phi,0) for theta in np.linspace(pi/2,pi/2,1) for phi in np.linspace(0,3*FOV_Dim,200) ]
+
+    skymap=SkyMap2(2**8,LVF_theta=FOV_theta, LVF_phi=FOV_phi, cap_theta=pi)
+    
+    for i, tupler in enumerate(pointings):
+        print i
+        skymap.make_dicts(i, tupler)
+
+    sum_array1=skymap.sum_hits()
+
+    print sum_array1
+    thetas=sum_array1[:,0]
+    phis=sum_array1[:,1]
+    hits= sum_array1[:,2]
+    moll_plot(thetas, phis, hits, "sum_allsky", "sum_allsky_ex")
+
+    least_array1=skymap.least_hits()
+
+    print least_array1
+    thetas=least_array1[:,0]
+    phis=least_array1[:,1]
+    hits= least_array1[:,2]
+    moll_plot(thetas, phis, hits, "least_allsky", "least_allsky_ex")
+
+    

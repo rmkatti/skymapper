@@ -47,8 +47,35 @@ def moll_plot_points(list_points, plot_title, savename):
 
     plt.savefig(savename+".png" )
 
+def moll_plot(theta_vals, phi_vals, hits, plot_title, savename):
+    """
+    :param 
+    """
+    Nhits= np.sum(hits)
+   
+    Dec=pi/2-np.asarray(theta_vals)
+    RA= phi_vals
+    RA[RA>=pi]-= 2*pi
+    
+    c_vals=hits
+    cmap=plt.cm.jet
+
+    fig= plt.figure()
+    ax= plt.subplot(111, projection="mollweide")
+    scat= ax.scatter(RA, Dec, s=10, c=c_vals, cmap=cmap, edgecolors='none')
+
+    plt.grid(True)
+    plt.title(plot_title + "; Total Hits %s" %(Nhits), y=1.06, color='b')
+
+    fig.colorbar(scat)
+    fig.set_size_inches(20.0,10.0)
+    plt.savefig(savename+".png" )
+
 
 
 if __name__=='__main__':
-    moll_plot_points(list_points=[(theta,phi) for theta in np.linspace(0,pi,20) 
-    for phi in np.linspace(0,2*pi,5) ], plot_title="Test", savename='test' )
+    #moll_plot_points(list_points=[(theta,phi) for theta in np.linspace(0,pi,20) 
+    #for phi in np.linspace(0,2*pi,5) ], plot_title="Test", savename='test' )
+
+    moll_plot(np.array([pi/4,3*pi/4]), np.array([pi/2,-pi/2]), np.array([10.0,20.0]), "SaveTitle", "CheckMollPlot")
+    

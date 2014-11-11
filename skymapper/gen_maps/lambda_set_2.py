@@ -48,11 +48,17 @@ def R_rule(R, lambda_in):
     return lambda_in*(1.0+1.0/R)
 
 if __name__=='__main__':
-    lambda_list2=gen_lambda(lambda_min=.75, lambda_max=1.32, R=41.95625926211772)
-    print lambda_list2, len(lambda_list2)
 
-    lambda_list3=gen_lambda(lambda_min=1.32, lambda_max=2.34, R=41.95625926211772)
-    print lambda_list3, len(lambda_list3)
+    lambda_band1= gen_lambda(lambda_min=.75, lambda_max=1.32, R=41.95625926211772)
+    lambda_band2= gen_lambda(lambda_min=1.32, lambda_max=2.34, R=41.95625926211772)
+    print lambda_band1, lambda_band2
+
+
+#    lambda_list2=gen_lambda(lambda_min=.75, lambda_max=1.32, R=41.95625926211772)
+#    print lambda_list2, len(lambda_list2)
+
+#    lambda_list3=gen_lambda(lambda_min=1.32, lambda_max=2.34, R=41.95625926211772)
+#    print lambda_list3, len(lambda_list3)
 
 #    phi2=phi2_band(3.52*pi/180.0, lambda_list3)
 #    print phi2, len(phi2)

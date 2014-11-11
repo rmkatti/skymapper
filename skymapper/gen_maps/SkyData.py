@@ -1,4 +1,8 @@
-'''Class for outputting and inputting skypixel data'''
+'''Class for handling skypixel data'''
+
+import matplotlib
+matplotlib.use('agg')
+import matplotlib.pyplot as plt
 
 import pandas as pd
 import numpy as np
@@ -6,66 +10,138 @@ import collections
 from numpy import pi
 import healpy as hp
 import time
+import random
+from skymapper.visualize.plot_points import moll_plot
 
 class SkyData(object):
     '''self.sky_table format: cols: 'theta', 'phi', 'lambda_0',...'lambda_n' '''
 
-    def __init__(self):
-        self.thetas=np.array([])
-        self.phis=np.array([])
-        self.lambda_vals2labels=collections.OrderedDict()
-        self.lambda_labels2vals=collections.OrderedDict()
-        self.sky_table=np.array([])
-    
-    def set_pix_lambdas(self, theta_in, phi_in, lambda_vals):
+    def __init__(self, theta_in, phi_in, lambda_in):
+        '''theta_in, phi_in numpy arrays of same length, 
+           lambda_in numpy array'''
 
-        if len(theta_in)!=len(phi_in):
-            raise TypeError("Unequal input vectors:len(theta_in) %s, len(phi_in) %s)" %(len(theta_in), len(phi_in)))
+        self.thetas=theta_in
+        self.phis=phi_in
+        self.lambdas=lambda_in
+        self.sky_df= self.make_sky_df(theta_in, phi_in, lambda_in)
 
-        self.make_lambda_lookups(lambda_vals)
+    def make_sky_df(self, theta_vals, phi_vals, lambda_vals):
+        '''Reads in 1D arrays each of theta_in, phi_in, and lambda_vals. Returns
+        pandas multidimensional index dataframe with top-level index theta_vals,
+        next-level index phi_vals, and bottom level index lambda_vals. For
+        each triple of index vals (thetai,phii,lambdai), there is a single
+        field corresponding to number of hits'''
 
-        interim_dict={}
-        for lambdai in self.lambda_labels2vals.keys():
-            interim_dict[lambdai]=np.zeros( len(theta_in) )
-        interim_dict['theta']= theta_in
-        interim_dict['phi']= phi_in
+        if len(theta_vals)!=len(phi_vals):
+            raise TypeError("Unequal input vectors:len(theta_vals) %s, len(phi_vals) %s)" %(len(theta_vals), len(phi_vals)))
+
+        index_row=len(theta_vals)*len(lambda_vals)
+        index_col = 3
+        index_mat=np.empty([index_row, index_col])*np.nan
+ 
+        index_mat[:,0]=np.repeat(theta_vals, len(lambda_vals))
+        index_mat[:,1]=np.repeat(phi_vals, len(lambda_vals))  
+        index_mat[:,2]=np.tile(lambda_vals, len(theta_vals))
         
-        self.sky_table=pd.DataFrame(interim_dict)
+        return pd.DataFrame(np.zeros(index_mat.shape[0]), index=pd.MultiIndex.from_arrays(index_mat.T))
 
-    def increment_hit(self, theta, phi, lambda_val):
-        lambda_label = lambda_vals2labels[lambda_val]
-        self.sky_table[ self.sky_table['theta']==theta,\
-                        self.sky_table['phi']==phi]+=1
+    def increment_hit(self, list_in):
+        '''Add one to hits value given list of [(theta1, phi1,lambda_1),
+        (theta2,phi2,lambda_val2)...] '''
 
+        self.sky_df.ix[list_in]+=1
+
+    def get_hits(self, list_in):
+        '''Return hits number at theta_val, phi_val, and lam_val'''
+
+        return self.sky_df.ix[list_in]
+        
+    def least_hits_array(self):
+        '''Returns numpy array with col: [thetas, phis, least_hits] '''
+
+        grouped=self.sky_df.groupby(level=[0,1]).min()
+        least_array=grouped.reset_index().values
+        least_array=least_array[least_array[:,2]>0]
+        return least_array
+
+    def sum_hits_array(self):
+        '''Returns numpy array with col: [thetas, phis, least_hits] '''
+
+        grouped=self.sky_df.groupby(level=[0,1]).sum()
+        least_array=grouped.reset_index().values
+        least_array=least_array[least_array[:,2]>0]
+        return least_array
 
     def make_lambda_lookups(self,lambdas):
 
-        self.make_lambda_vals2labels(lambdas)
-        self.lambda_labels2vals={v:k for k,v in self.lambda_vals2labels.items()}
+        l_vals_2_lab=self.make_lambda_vals2labels(lambdas)
+        l_lab_2_vals={v:k for k,v in l_vals_2_lab.items()}
+        return l_vals_2_lab, l_lab_2_vals 
 
     def make_lambda_vals2labels(self,lambdas):
-        
+
+        lambda_v2l=collections.OrderedDict()
+
         for i, lambdai in enumerate(lambdas):
-            self.lambda_vals2labels[lambdai]= 'lambda_%s' %(i)
+            lambda_v2l[lambdai]= 'lambda_%s' %(i)
+
+        return lambda_v2l
 
 if __name__=='__main__':
     
-    nside=2**10
-    npix=12*nside**2 # number of pixels on sphere, npix=12*nside**2, nside $
+    nside=2**8
+    npix=12*nside**2 
     ind=np.arange(npix) # index of pointings
     pix_array=np.array( hp.pix2ang(nside, ind)).T 
-    theta_in=pix_array[:,0]
-    phi_in=pix_array[:,1]
+    theta_in1=pix_array[:,0]
+    phi_in1=pix_array[:,1]
+    lambda_in1 = np.linspace(.75,2.4,41)
+    print len(phi_in1), len(theta_in1)
 
-    print len(phi_in), len(theta_in)
+    time6=time.time() 
+    sky_dat1=SkyData(theta_in1, phi_in1, lambda_in1)
+    time7=time.time()   
+    print ("Time to make data frame: %s" %(time7-time6))
+    print sky_dat1.sky_df.shape
+
+    interim_list=[]
+    timer=0
     time1=time.time()
-    sky_dat1=SkyData()
-    sky_dat1.set_pix_lambdas(theta_in, phi_in, np.linspace(.75, 2.4 ,41) )
-    
-    time3=time.time()
-    sky_dat1.increment_hit( theta_in[0], phi_in[0], .75)
-    time2=time.time()
+    #for i in range(100):
+    #    rin=random.randint(0,len(theta_in1))
+    #    thet_rand, phi_rand, lam_rand = [theta_in1[rin], phi_in1[rin], random.choice(lambda_in1)]
+    #    interim_list.append((thet_rand,phi_rand,lam_rand))       
 
-    print "Time of Increment: %s" %(time2-time3)
-    print "Time of Execution: %s" %(time2-time1)
-    print sky_dat1.sky_table
+    interim_list=[]
+    timer=0
+    time1=time.time()
+    for j in range(5):
+        for i, lambdai in enumerate(lambda_in1):
+            tupleri=(theta_in1[j], phi_in1[j], lambda_in1[i])
+            interim_list.append(tupleri)       
+
+
+    ex_list=[interim_list[0]]
+    
+    print sky_dat1.get_hits(ex_list)
+    time3=time.time()           
+    sky_dat1.increment_hit(ex_list)
+    time4=time.time()        
+    print sky_dat1.get_hits(ex_list)
+    print "Time of Execution Ex: %s" %(time4-time3)
+  
+    
+    print sky_dat1.get_hits(interim_list)
+    time3=time.time()           
+    sky_dat1.increment_hit(interim_list)
+    time4=time.time()        
+    print "Time of Execution Interim: %s" %(time4-time3)
+    print sky_dat1.get_hits(interim_list)
+
+    least_array1= sky_dat1.least_hits_array()
+    print least_array1
+
+    thetas=least_array1[:,0]
+    phis=least_array1[:,1]
+    hits= least_array1[:,2]    
+    moll_plot(thetas, phis, hits, "least_allsky", "least_allsky_ex")
