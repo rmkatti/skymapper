@@ -69,6 +69,7 @@ class SkyMap2(object):
 
         in_arr=np.around(pix_array[ pix_array[:,0]<= cap_theta ],5)
         self.skydata=SkyData(in_arr[:,0], in_arr[:,1], lambda_in)      
+        print max(in_arr[:,1]), min(in_arr[:,1])
 
         # LVF theta and phi bounds
         self.LVF_theta_dim= LVF_theta
@@ -180,7 +181,10 @@ class SkyMap2(object):
                     out_arr2=np.concatenate((out_arr2, interim_arr),axis=0)
 
         out_arr = np.concatenate((out_arr1,out_arr2),axis=0)
-        out_arr=out_arr[ (out_arr[:,0]<pi) & (out_arr[:,1]<2*pi)] # Needs to be fixed
+        out_arr[:,1] = np.mod(out_arr[:,1],2*pi)
+        out_arr[:,0] = np.mod(out_arr[:,0], pi)
+        out_arr=np.round(out_arr,5)
+        
         self.skydata.increment_hit(map(tuple,out_arr))
 
 
@@ -204,11 +208,14 @@ class SkyMap2(object):
         data_rot[:,0] = np.arccos( pixvec_r[:,2] ) 
         data_rot[:,1] = np.arctan2(pixvec_r[:,1], pixvec_r[:,0])
         data_rot[ data_rot[:,1]< 0 ]+= [0,2*pi]
-        
+                
+
         #if np.round(theta,9)==0.0 or np.round(theta,9)==np.round(pi,9):
         #    return theta,0.0
         if np.any(data_rot[:,0]<0):
             raise ValueError
+        if np.any(data_rot[:,1]>2*pi):
+            raise ValueError('Phi vals greater than 2*pi: %s' %(data_rot[:,1]>2*pi))
 
         return data_rot        
 
@@ -273,13 +280,22 @@ class SkyMap2(object):
 
         return self.skydata.sum_hits_array()
 
+    def sum_lambda(self):
+
+        return self.skydata.lambda_counts_sum()
+
+    def least_lambda(self):
+
+        return self.skydata.lambda_counts_least()
+
+
 
 if __name__=='__main__':
     FOV_Dim=(2048*6.2/3600)*(pi/180) # Base Dimension
     FOV_phi=FOV_Dim*2
     FOV_theta=FOV_Dim
 
-    pointings=[(theta,phi,0) for theta in np.linspace(pi/2,pi/2,1) for phi in np.linspace(0,3*FOV_Dim,200) ]
+    pointings=[(theta,phi,0) for theta in np.linspace(0,pi,100) for phi in np.linspace(2*pi-.0005,1) ]
 
     skymap=SkyMap2(2**8,LVF_theta=FOV_theta, LVF_phi=FOV_phi, cap_theta=pi)
     

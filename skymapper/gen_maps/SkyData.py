@@ -72,20 +72,21 @@ class SkyData(object):
         least_array=least_array[least_array[:,2]>0]
         return least_array
 
-    def make_lambda_lookups(self,lambdas):
+    def lambda_counts_sum(self):
+        '''Returns numpy array with col: [thetas, phis, least_hits] '''
 
-        l_vals_2_lab=self.make_lambda_vals2labels(lambdas)
-        l_lab_2_vals={v:k for k,v in l_vals_2_lab.items()}
-        return l_vals_2_lab, l_lab_2_vals 
+        grouped=self.sky_df.groupby(level=2).sum()
+        lambda_array=grouped.reset_index().values
+        return lambda_array
 
-    def make_lambda_vals2labels(self,lambdas):
+    def lambda_counts_least(self):
+        '''Returns numpy array with col: [thetas, phis, least_hits] '''
 
-        lambda_v2l=collections.OrderedDict()
+        grouped=self.sky_df.groupby(level=2).min()
+        lambda_array=grouped.reset_index().values
+        return lambda_array
 
-        for i, lambdai in enumerate(lambdas):
-            lambda_v2l[lambdai]= 'lambda_%s' %(i)
 
-        return lambda_v2l
 
 if __name__=='__main__':
     
