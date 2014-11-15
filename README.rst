@@ -30,8 +30,8 @@ of accelerated expansion in the early universe. The mission will produce a
 catalog of low-redshift galaxies to calculate non-Gaussianity in the 
 distribution of matter in the universe.
 Ultimately, these results will be used to estimate the so-called |fnL| parameter. 
-|f_nL| > 1 would suggest that several fundamental fields drove inflation, while
-|f_nL| < 1 would be evidence that a single fundamental field drove inflation. 
+|fnL| > 1 would suggest that several fundamental fields drove inflation, while
+|fnL| < 1 would be evidence that a single fundamental field drove inflation. 
 Either result would be a major advancement in current understanding of the physical universe.  
 
 * **Explore the origin and evolution of galaxies**
@@ -86,11 +86,16 @@ Dependencies
 
 The standard python module for numerical computing: http://www.numpy.org/
 
-2) **Matplotlib**
+2) **Pandas**
+
+Python library providing high performance data structures and data analysis tools:
+http://pandas.pydata.org/
+
+3) **Matplotlib**
 
 The standard python module for data visualization: http://matplotlib.org/
 
-3) **Healpix**
+4) **Healpix**
 
 Python implementation of the HEALPIX algorithm. Useful for discretization 
 of the sky in CMB and astronomy-related work: 
