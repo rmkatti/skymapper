@@ -5,7 +5,7 @@ skymapper
 .. |fnL| replace:: f\ :sub:`nL` 
 
 **skymapper** is a Python package designed to define, visualize and analyze 
-all-sky and deep-sky surveys. It was created for SPHEREx, 
+all-sky and deep-sky surveys for SPHEREx, 
 an Earth-orbiting spectrophotometer in development at 
 Caltech/Jet Propulsion Laboratory. 
 
@@ -31,7 +31,7 @@ catalog of low-redshift galaxies to calculate non-Gaussianity in the
 distribution of matter in the universe.
 Ultimately, these results will be used to estimate the so-called |fnL| parameter. 
 |fnL| > 1 would suggest that several fundamental fields drove inflation, while
-|fnL| < 1 would be evidence that a single fundamental field drove inflation. 
+|fnL| < 1 would suggest that a single fundamental field drove inflation. 
 Either result would be a major advancement in current understanding of the physical universe.  
 
 * **Explore the origin and evolution of galaxies**
@@ -77,7 +77,7 @@ Version Information
 :Date: 2014-10-8
 :Version: 1.0.0
 :Authors: Raj Katti
-:Contact: rmkatti@caltech.edu, rmkatti@gmail.com
+:Contact: rmkatti@gmail.com
 
 Dependencies
 ------------
