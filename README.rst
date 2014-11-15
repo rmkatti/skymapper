@@ -6,7 +6,7 @@ skymapper
 
 **skymapper** is a Python package designed to define, visualize and analyze 
 all-sky and deep-sky surveys. It was created for SPHEREx, 
-an Earth-orbiting spectrophotometer satellite in development at 
+an Earth-orbiting spectrophotometer in development at 
 Caltech/Jet Propulsion Laboratory. 
 
 .. figure:: ./_build/allsky2_complete_1.png
@@ -18,9 +18,9 @@ Caltech/Jet Propulsion Laboratory.
 
 What is SPHEREx?
 ----------------
-SPHEREx stands for **S**\ pectrop\ **H**\ otometer for the **H**\ istory of 
+**SPHEREx** stands for **S**\ pectrop\ **H**\ otometer for the **H**\ istory of 
 the Universe, **E**\ poch of **R**\ eionization, and **I**\ ces **Ex**\ plorer.
-Over the course of its two-year mission, SPHEREx will create two near-IR 
+Over its two-year mission, SPHEREx will create two near-IR 
 sky surveys to address NASA's three major astrophysics goals:
 
 * **Probe the origin and destiny of our universe**
@@ -30,16 +30,14 @@ of accelerated expansion in the early universe. The mission will produce a
 catalog of low-redshift galaxies to calculate non-Gaussianity in the 
 distribution of matter in the universe.
 Ultimately, these results will be used to estimate the so-called |fnL| parameter. 
-An f_nL parameter greater than unity would suggest several fundamental 
-fields drove inflation, while
-an f_nL parameter less than unity would be evidence that a single fundamental
-field drove inflation. Either result would be a major advancement in current
-understanding of the physical universe.  
+|f_nL| > 1 would suggest that several fundamental fields drove inflation, while
+|f_nL| < 1 would be evidence that a single fundamental field drove inflation. 
+Either result would be a major advancement in current understanding of the physical universe.  
 
 * **Explore the origin and evolution of galaxies**
 
 
-| * **Discover and study planets around other stars, and explore whether they could
+|\ * **Discover and study planets around other stars, and explore whether they could
 harbor life**
 
 What is **skymapper**?
