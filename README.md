@@ -12,7 +12,7 @@ What is SPHEREx?
 ----------------
 .. |fnL| replace:: f\ :sub:'nL'\
 
-SPHEREx stands for **S**pectrop**H**otometer for the **H**istory of th Universe,
+SPHEREx stands for **S** pectrop**H**otometer for the **H**istory of th Universe,
 **E**poch of **R**eionization, and **I**ces **Ex**plorer. 
 Over the course of its two-year mission, SPHEREx will create two near-IR 
 surveys to address NASA's three major astrophysics goals:
