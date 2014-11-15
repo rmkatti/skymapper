@@ -10,12 +10,12 @@ Caltech/Jet Propulsion Laboratory.
 
 What is SPHEREx?
 ----------------
-SPHEREx stands for **S** pectrop **H** otometer for the **H** istory of th Universe
+SPHEREx stands for **S**pectrop**H**otometer for the **H**istory of th Universe,
 **E**poch of **R**eionization, and **I**ces **Ex**plorer.
 Over the course of its two-year mission, SPHEREx will create two near-IR 
 surveys to address NASA's three major astrophysics goals:
 
-Probe the origin and destiny of our universe
+* Probe the origin and destiny of our universe
 
 SPHEREx seeks to describe the nature of cosmic inflation, the theorized phase of
 of accelerated expansion in the early universe. The mission will produce a 
@@ -28,10 +28,10 @@ an f_nL parameter less than unity would be evidence that a single fundamental
 field drove inflation. Either result would be a major advancement in current
 understanding of the physical universe.  
 
-Explore the origin and evolution of galaxies
+* Explore the origin and evolution of galaxies
 
 
-Discover and study planets around other stars, and explore whether they could
+* Discover and study planets around other stars, and explore whether they could
 harbor life.
 
 What is **skymapper**?
