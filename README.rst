@@ -2,7 +2,7 @@
 skymapper
 =========
 
-.. |fnL| replace:: f\ :sub:'nL'\ 
+.. |fnL| replace:: f\ :sub:`nL` 
 
 **skymapper** is a Python package designed to define, visualize and analyze 
 all-sky and deep-sky surveys. It was created for SPHEREx, 
@@ -19,7 +19,7 @@ Caltech/Jet Propulsion Laboratory.
 What is SPHEREx?
 ----------------
 SPHEREx stands for **S**\ pectrop\ **H**\ otometer for the **H**\ istory of 
-th Universe, **E**\ poch of **R**\ eionization, and **I**\ ces **Ex**\ plorer.
+the Universe, **E**\ poch of **R**\ eionization, and **I**\ ces **Ex**\ plorer.
 Over the course of its two-year mission, SPHEREx will create two near-IR 
 sky surveys to address NASA's three major astrophysics goals:
 
@@ -39,7 +39,7 @@ understanding of the physical universe.
 * **Explore the origin and evolution of galaxies**
 
 
-|* **Discover and study planets around other stars, and explore whether they could
+| * **Discover and study planets around other stars, and explore whether they could
 harbor life**
 
 What is **skymapper**?
