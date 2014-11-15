@@ -18,8 +18,8 @@ Caltech/Jet Propulsion Laboratory.
 
 What is SPHEREx?
 ----------------
-**SPHEREx** stands for **S**\ pectrop\ **H**\ otometer for the **H**\ istory of 
-the Universe, **E**\ poch of **R**\ eionization, and **I**\ ces **Ex**\ plorer.
+**SPHEREx** stands for **S**\ pectro\ **P**\ hotometer for the **H**\ istory of 
+the Universe, **E**\ poch of **R**\ eionization, and Ices **Ex**\ plorer.
 Over its two-year mission, SPHEREx will create two near-IR 
 sky surveys to address NASA's three major astrophysics goals:
 
