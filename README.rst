@@ -37,7 +37,7 @@ Either result would be a major advancement in current understanding of the physi
 * **Explore the origin and evolution of galaxies**
 
 
- * **Discover and study planets around other stars, and explore whether they could harbor life**
+* **Discover and study planets around other stars, and explore whether they could harbor life**
 
 What is **skymapper**?
 -----------------------
