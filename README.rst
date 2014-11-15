@@ -9,6 +9,12 @@ all-sky and deep-sky surveys. It was created for SPHEREx,
 an Earth-orbiting spectrophotometer satellite in development at 
 Caltech/Jet Propulsion Laboratory. 
 
+.. figure:: ./_build/allsky2_complete_1.png
+   :align:  center
+   :alt: All Sky scan
+   :figclass: align-center
+
+   ..
 
 What is SPHEREx?
 ----------------
@@ -33,20 +39,13 @@ understanding of the physical universe.
 * **Explore the origin and evolution of galaxies**
 
 
-* **Discover and study planets around other stars, and explore whether they could
+|* **Discover and study planets around other stars, and explore whether they could
 harbor life**
 
 What is **skymapper**?
 -----------------------
 
 **Hits Map of All Sky Scan (Mollweide Projection)**
-
-.. figure:: ./_build/allsky2_complete_1.png
-   :align:  center
-   :alt: All Sky scan
-   :figclass: align-center
-
-   ..
 
 
 **Hits Map of Deep Sky Scan About North Celestial Pole (Polar Plot)** 
