@@ -2,17 +2,19 @@
 skymapper
 =========
 
-.. |fnL| replace:: f\ :sub:'nL'\
 
-<Attention Grabbing Figure>
+"Attention Grabbing Figure"
 
 **skymapper** is a Python package designed to define, visualize and analyze 
 all-sky and deep-sky surveys. It was created for SPHEREx, 
 an Earth-orbiting spectrophotometer satellite in development at 
 Caltech/Jet Propulsion Laboratory. 
 
+
 What is SPHEREx?
 ----------------
+.. |fnL| replace:: f\ :sub:'nL'\
+
 SPHEREx stands for **S**pectrop**H**otometer for the **H**istory of th Universe,
 **E**poch of **R**eionization, and **I**ces **Ex**plorer. 
 Over the course of its two-year mission, SPHEREx will create two near-IR 
