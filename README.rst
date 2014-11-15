@@ -77,6 +77,7 @@ Version Information
 :Date: 2014-10-8
 :Version: 1.0.0
 :Authors: Raj Katti
+:Contact: rmkatti@caltech.edu, rmkatti@gmail.com
 
 Dependencies
 ------------
@@ -93,7 +94,7 @@ Python library providing high performance data structures and data analysis tool
 
 The standard Python library for data visualization: http://matplotlib.org/
 
-4) **Healpix**
+4) **Healpy**
 
 Python implementation of the HEALPIX algorithm. Useful for discretizing the sky
 in CMB and astronomy-related work: 
