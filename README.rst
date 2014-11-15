@@ -2,9 +2,6 @@
 skymapper
 =========
 
-
-"Attention Grabbing Figure"
-
 **skymapper** is a Python package designed to define, visualize and analyze 
 all-sky and deep-sky surveys. It was created for SPHEREx, 
 an Earth-orbiting spectrophotometer satellite in development at 
@@ -39,22 +36,8 @@ understanding of the physical universe.
 * Discover and study planets around other stars, and explore whether they could
 harbor life.
 
-
-  
- 
-
-
-
-1) One-sentence Description SphereX/ Mission Type/ Participating Institutions
-2) Science Goals
-3) TimeFrame
-
-<Figures?>
-
 What is **skymapper**?
 -----------------------
-
-
 
 **Hits Map of All Sky Scan (Mollweide Projection)**
 
