@@ -84,21 +84,20 @@ Dependencies
 
 1) **Numpy**
 
-The standard python module for numerical computing: http://www.numpy.org/
+The standard Python library for numerical computing: http://www.numpy.org/
 
 2) **Pandas**
 
-Python library providing high performance data structures and data analysis tools:
-http://pandas.pydata.org/
+Python library providing high performance data structures and data analysis tools: http://pandas.pydata.org/
 
 3) **Matplotlib**
 
-The standard python module for data visualization: http://matplotlib.org/
+The standard Python library for data visualization: http://matplotlib.org/
 
 4) **Healpix**
 
-Python implementation of the HEALPIX algorithm. Useful for discretization 
-of the sky in CMB and astronomy-related work: 
+Python implementation of the HEALPIX algorithm. Useful for discretizing the sky
+in CMB and astronomy-related work: 
 
 * HEALPIX: http://healpix.jpl.nasa.gov/
 * healpy documentation: http://healpy.readthedocs.org/en/latest/
@@ -106,5 +105,5 @@ of the sky in CMB and astronomy-related work:
 Citations
 ------------
 
-Bock, J.J. et al. In Press.*SPHEREx: An All-Sky Spectral Survey*.
+Bock, J.J. et al. In Press. *\ SPHEREx: An All-Sky Spectral Survey*\ .
 California Institute of Technology, Pasadena.
