@@ -9,13 +9,15 @@ all-sky and deep-sky surveys for SPHEREx,
 an Earth-orbiting spectrophotometer in development at 
 Caltech/Jet Propulsion Laboratory. 
 
-.. figure:: ./_build/allsky2_complete_1.png
-   :align:  center
-   :alt: All Sky scan
+
+.. figure:: ./_build/deep_color_multfile.png
+   :align: center
+   :alt: Evolution of Deep Sky Scan
    :figclass: align-center
 
-.. class:: center
-**Fig 1) Hits Map of All Sky Scan (Mollweide Projection)**
+**Fig 1) Least Hits Maps of the Evolution of SPHEREx Deep-Sky Survey. 
+Clockwise from upper left: Day 91, Day 183, Day 273, 1 Year** 
+
  
 
 What is SPHEREx?
@@ -64,20 +66,20 @@ by 1000 times.
 What is **skymapper**?
 -----------------------
 
-.. figure:: ./_build/phi_365_uniform_fulllambda.png
-   :align: center
-   :alt: Deep Sky Scan
-   :figclass: align-center
-**Fig 2) Hits Map of Deep Sky Scan About North Celestial Pole (Polar Plot)** 
-
-   ..
-   
 The SPHEREx mission relies on two surveys, a low-redundancy large-area 
 "all-sky" survey and a high-redundancy "deep-sky" survey about the 
 celestial poles.
 *\ skymapper*\ was created to define, analyze, and visualize scan strategies to achieve
 these two surveys. Coverage maps generated using *\ skymapper*\ will be 
 published in the SPHEREx proposal in December 2014 (see Citation 1).
+
+.. figure:: ./_build/allsky2_complete_1.png
+   :align:  center
+   :alt: All Sky scan
+   :figclass: align-center
+
+.. class:: center
+**Fig 1) Hits Map of All Sky Scan (Mollweide Projection)**
 
 The SPHEREx spectrophotometer consists of near-IR detector arrays covered 
 by rectangular linear variable filters (LVFs). To good approximation, the LVFs
@@ -112,13 +114,14 @@ any wavlength it not be colored, if it is seen at least once at all wavelengths
 it will be colored corresponding to "1", etc. A least-hits coverage map 
 corresponds to a scan's minimum coverage at any chosen wavelength range.
 
-.. figure:: ./_build/deep_color_multfile.png
+.. figure:: ./_build/phi_365_uniform_fulllambda.png
    :align: center
-   :alt: Evolution of Deep Sky Scan
+   :alt: Deep Sky Scan
    :figclass: align-center
-**Fig 3) Evolution of Deep Sky Scan ** 
+**Fig 2) Hits Map of Deep Sky Scan About North Celestial Pole (Polar Plot)** 
 
    ..
+   
 
 
 
