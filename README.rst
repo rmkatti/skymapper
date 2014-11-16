@@ -17,11 +17,10 @@ Caltech/Jet Propulsion Laboratory.
 
 **Fig 1)** Least Hits Maps of the one year evolution of the SPHEREx Deep-Sky 
 Survey.
-Clockwise from upper left: Day 91, Day 183, Day 273, 1 Year
+Clockwise from upper left: Day 91, Day 183, Day 273, 1 Year.
 All plots are looking down on the north celestial pole. Colors correspond to 
-least number of times seen by the FOV over all wavelengths (see "What is 
+least number of times seen by the SPHEREx field-of-view over all wavelengths (see "What is 
 skymapper?" section for more details) 
-
  
 What is SPHEREx?
 ----------------
