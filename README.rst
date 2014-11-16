@@ -4,7 +4,7 @@ skymapper
 
 .. |fnL| replace:: f\ :sub:`nL` 
 
-**skymapper** is a Python package designed to define, visualize and analyze 
+*\ skymapper*\ is a Python package designed to define, visualize and analyze 
 all-sky and deep-sky surveys for SPHEREx, 
 an Earth-orbiting spectrophotometer in development at 
 Caltech/Jet Propulsion Laboratory. 
@@ -20,7 +20,7 @@ What is SPHEREx?
 ----------------
 **SPHEREx** stands for **S**\ pectro\ **P**\ hotometer for the **H**\ istory of 
 the Universe, **E**\ poch of **R**\ eionization, and Ices **Ex**\ plorer.
-Over its two-year mission, SPHEREx will create two near-IR 
+Over its two-year mission, SPHEREx will create two near-infared 
 sky surveys to address NASA's three major astrophysics goals:
 
 * **Probe the origin and destiny of our universe**
@@ -28,7 +28,7 @@ sky surveys to address NASA's three major astrophysics goals:
 SPHEREx seeks to describe the nature of cosmic inflation, the theorized phase of
 of accelerated expansion in the early universe. The mission will produce a 
 catalog of low-redshift galaxies to calculate non-Gaussianity in the 
-distribution of matter in the universe.Ultimately, these results will be used 
+distribution of matter in the universe. Ultimately, these results will be used 
 to estimate the so-called |fnL| parameter. 
 |fnL| > 1 would suggest that several fundamental fields drove inflation, while
 |fnL| < 1 would suggest that a single fundamental field drove inflation. 
@@ -51,12 +51,11 @@ formation.
 * **Discover and study planets around other stars, and explore whether they could harbor life**
 
 Star formation occurs in dense interstellar clouds of dust and ice. 
-Since planets
-are assembled from interstellar dust and ice, it has been
-hypothesized that water in our solar system is primarily due to interstellar
+It has been hypothesized that water in our solar system is primarily due 
+to interstellar
 ice with minimal processing in the pre-solar disk. This remains an open
 question due to the small number of samples taken of ice abundance. SPHEREx
-will remedy this by increasing the sample of galactice ice absorption 
+will remedy this by increasing the number of samples of galactice ice absorption 
 by 1000 times.
 
 
@@ -75,21 +74,47 @@ What is **skymapper**?
 
    ..
    
-Coverage map development requires defining field-of-view (FOV) dimensions, inputing list of pointing directions 
-as tuples of (theta, phi, ax), i.e. polar angle, azimuthal angle, and axial angle, and defining the FOV wavelength ranges.
-Current implementation defines FOV dimension as a rectangular, 2:1 azimuthal-to-polar linear variable filter with wavelength 
-changing across azimuthal direction as sensitivity R (input parameter). Output is a dictionary with wavelength values as keys and 
-pixel centers (theta, phi) as values.
+The SPHEREx mission relies on two surveys, a low-redundancy large-area 
+"all-sky" survey and a high-redundancy "deep-sky" survey about the 
+celestial poles.
+*\ skymapper *\ was created to define, analyze, and visualize scan strategies to achieve
+these two surveys. Coverage maps generated using *\ skymapper *\ will be 
+published in the SPHEREx proposal in December 2014 (see Citation 1).
 
-Visualization allows two types of coverage maps. Sky regions, collections of sky pixels discretized by HEALPIX algorithm,
-viewed multiple times are colored corresponding to an increasing viewing redundancy. The all-sky map is a Mollweide 
-projection (upper picture), and the deep-sky map centered around the celestial north pole is a radial projection for
-small angles about the pole. 
+The SPHEREx spectrophotometer consists of near-IR detector arrays covered 
+by rectangular linear variable filters (LVFs). To good approximation, the LVFs
+are divided into equal-area "stripes" of constant wavelength. They are 
+joined along their dispersion direction to produce a single rectangular 
+field-of-view (FOV) comprised of multiple wavelength strips. 
+Since there are no moving parts associated with
+the spectrophotometer, sky coverage is achieved by strategically pointing 
+the spacecraft in desired directions.
 
-Analysis identifies areas of missed sky coverage at input wavelength ranges. Wavelength dictionaries may be converted 
-easily to 2D numpy arrays with pixel centers in first two columns, viewing wavelengths as remaining columns, and array
-values being redundancy information of a given sky pixel at a particular wavelength. Radial histograms allow binning sky
-pixels by radial distance from north celestrial pole for input observing wavelength.
+*\ skymapper *\ discretizes the sky into equal-area iso-latitude "sky pixels" 
+defined by the HEALPIX algorithm. It generates and/or reads in a list of 
+pointing directions
+parametrized by the polar, azimuthal, and axial angles of the axis passing 
+through the center of Earth and the center of the FOV. For each pointing, it 
+records the sky pixel 
+coordinates observed at each wavelength of the FOV 
+using an efficient Pandas dataframe and
+NumPy methods. To analyze a scan and compare to others, skymapper produces a 
+figure-of-merit associated with the efficiency and effective area of the scan.
+To visualize scans, it generates plots of redundancy maps, a.k.a. "hits maps",
+at desired wavelength ranges, with sky pixels colored
+according to the redundancy of the survey in that wavelength range. Deep-sky 
+scans are plotted as 
+polar plots about the celestial pole (survey is symmetric for North and 
+South celestial poles). All-sky scans are plotted on 
+Mollweide full-sky projections. Most useful, skymapper generates 
+for each scan a least-hits coverage map, in which  each sky pixel is colored 
+corresponding to the
+least number of hits for all wavelengths, i.e. if a pixel is missed at
+any wavlength it not be colored, if it is seen at least once at all wavelengths 
+it will be colored corresponding to "1", etc. A least-hits coverage map 
+corresponds to a scan's minimum coverage at any chosen wavelength range.
+
+
 
 
 Version Information
@@ -118,7 +143,7 @@ The standard Python library for data visualization: http://matplotlib.org/
 4) **Healpy**
 
 Python implementation of the HEALPIX algorithm. Useful for discretizing the sky
-in CMB and astronomy-related work: 
+in CMB- and astronomy-related work: 
 
 * HEALPIX: http://healpix.jpl.nasa.gov/
 * healpy documentation: http://healpy.readthedocs.org/en/latest/
