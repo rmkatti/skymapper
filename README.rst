@@ -15,7 +15,6 @@ Caltech/Jet Propulsion Laboratory.
    :figclass: align-center
 
 .. class:: center
-
 **Fig 1) Hits Map of All Sky Scan (Mollweide Projection)**
  
 
