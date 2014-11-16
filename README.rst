@@ -112,7 +112,7 @@ any wavlength it not be colored, if it is seen at least once at all wavelengths
 it will be colored corresponding to "1", etc. A least-hits coverage map 
 corresponds to a scan's minimum coverage at any chosen wavelength range.
 
-.. figure:: ./_build/deep_multfile.png
+.. figure:: ./_build/deep_color_multfile.png
    :align: center
    :alt: Evolution of Deep Sky Scan
    :figclass: align-center
