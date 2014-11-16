@@ -120,7 +120,7 @@ corresponds to a scan's minimum coverage at any chosen wavelength range.
 Version Information
 --------------------
 
-:Date: 2014-10-8
+:Date: 2014-11-16
 :Version: 1.0.0
 :Authors: Raj Katti
 :Contact: rmkatti@gmail.com
