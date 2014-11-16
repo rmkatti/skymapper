@@ -15,8 +15,8 @@ Caltech/Jet Propulsion Laboratory.
    :alt: Evolution of Deep Sky Scan
    :figclass: align-center
 
-**Fig 1) Least Hits Maps of the Evolution of SPHEREx Deep-Sky Survey. 
-Clockwise from upper left: Day 91, Day 183, Day 273, 1 Year** 
+**Fig 1)** Least Hits Maps of the Evolution of SPHEREx Deep-Sky Survey. 
+Clockwise from upper left: Day 91, Day 183, Day 273, 1 Year
 
  
 
@@ -69,8 +69,8 @@ What is **skymapper**?
 The SPHEREx mission relies on two surveys, a low-redundancy large-area 
 "all-sky" survey and a high-redundancy "deep-sky" survey about the 
 celestial poles.
-*\ skymapper*\ was created to define, analyze, and visualize scan strategies to achieve
-these two surveys. Coverage maps generated using *\ skymapper*\ will be 
+*\ skymapper*\  was created to define, analyze, and visualize scan strategies to achieve
+these two surveys. Coverage maps generated using *\ skymapper*\  will be 
 published in the SPHEREx proposal in December 2014 (see Citation 1).
 
 .. figure:: ./_build/allsky2_complete_1.png
@@ -79,7 +79,7 @@ published in the SPHEREx proposal in December 2014 (see Citation 1).
    :figclass: align-center
 
 .. class:: center
-**Fig 1) Hits Map of All Sky Scan (Mollweide Projection)**
+**Fig 2)** Hits Map of All Sky Scan (Mollweide Projection)
 
 The SPHEREx spectrophotometer consists of near-IR detector arrays covered 
 by rectangular linear variable filters (LVFs). To good approximation, the LVFs
@@ -90,7 +90,7 @@ Since there are no moving parts associated with
 the spectrophotometer, sky coverage is achieved by strategically pointing 
 the spacecraft in desired directions.
 
-*\ skymapper*\ discretizes the sky into equal-area iso-latitude "sky pixels" 
+*\ skymapper*\  discretizes the sky into equal-area iso-latitude "sky pixels" 
 defined by the HEALPIX algorithm. It generates and/or reads in a list of 
 pointing directions
 parametrized by the polar, azimuthal, and axial angles of the axis passing 
@@ -118,7 +118,7 @@ corresponds to a scan's minimum coverage at any chosen wavelength range.
    :align: center
    :alt: Deep Sky Scan
    :figclass: align-center
-**Fig 2) Hits Map of Deep Sky Scan About North Celestial Pole (Polar Plot)** 
+**Fig 3)** Hits Map of Deep Sky Scan About North Celestial Pole (Polar Plot)
 
    ..
    
