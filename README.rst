@@ -13,8 +13,9 @@ Caltech/Jet Propulsion Laboratory.
    :align:  center
    :alt: All Sky scan
    :figclass: align-center
-   **Fig 1) Hits Map of All Sky Scan (Mollweide Projection)**
 
+   **Fig 1) Hits Map of All Sky Scan (Mollweide Projection)**
+   ..
 
 What is SPHEREx?
 ----------------
