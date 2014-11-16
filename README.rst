@@ -4,7 +4,7 @@ skymapper
 
 .. |fnL| replace:: f\ :sub:`nL` 
 
-*\ skymapper*\ is a Python package designed to define, visualize and analyze 
+*\ skymapper*\  is a Python package designed to define, visualize and analyze 
 all-sky and deep-sky surveys for SPHEREx, 
 an Earth-orbiting spectrophotometer in development at 
 Caltech/Jet Propulsion Laboratory. 
@@ -14,7 +14,7 @@ Caltech/Jet Propulsion Laboratory.
    :alt: All Sky scan
    :figclass: align-center
 
-**Fig 1) Hits Map of All Sky Scan (Mollweide Projection)**
+   **Fig 1) Hits Map of All Sky Scan (Mollweide Projection)**
 
 
 What is SPHEREx?
