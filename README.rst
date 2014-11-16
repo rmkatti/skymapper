@@ -15,11 +15,14 @@ Caltech/Jet Propulsion Laboratory.
    :alt: Evolution of Deep Sky Scan
    :figclass: align-center
 
-**Fig 1)** Least Hits Maps of the Evolution of SPHEREx Deep-Sky Survey. 
+**Fig 1)** Least Hits Maps of the one year evolution of the SPHEREx Deep-Sky 
+Survey.
 Clockwise from upper left: Day 91, Day 183, Day 273, 1 Year
+All plots are looking down on the north celestial pole. Colors correspond to 
+least number of times seen by the FOV over all wavelengths (see "What is 
+skymapper?" section for more details) 
 
  
-
 What is SPHEREx?
 ----------------
 **SPHEREx** stands for **S**\ pectro\ **P**\ hotometer for the **H**\ istory of 
@@ -79,7 +82,7 @@ published in the SPHEREx proposal in December 2014 (see Citation 1).
    :figclass: align-center
 
 .. class:: center
-**Fig 2)** Hits Map of All Sky Scan (Mollweide Projection)
+**Fig 2)** Hits Map of All-Sky Scan for Wavelength Range [.75um, .76um] (Mollweide Projection)
 
 The SPHEREx spectrophotometer consists of near-IR detector arrays covered 
 by rectangular linear variable filters (LVFs). To good approximation, the LVFs
@@ -103,26 +106,16 @@ figure-of-merit associated with the efficiency and effective area of the scan.
 To visualize scans, it generates plots of redundancy maps, a.k.a. "hits maps",
 at desired wavelength ranges, with sky pixels colored
 according to the redundancy of the survey in that wavelength range. Deep-sky 
-scans are plotted as 
+scans (Fig. 1) are plotted as 
 polar plots about the celestial pole (survey is symmetric for North and 
-South celestial poles). All-sky scans are plotted on 
+South celestial poles). All-sky scans (Fig. 2) are plotted on 
 Mollweide full-sky projections. Most useful, skymapper generates 
-for each scan a least-hits coverage map, in which  each sky pixel is colored 
+for each scan a least-hits coverage map (Fig. 1), in which  each sky pixel is colored 
 corresponding to the
 least number of hits for all wavelengths, i.e. if a pixel is missed at
 any wavlength it not be colored, if it is seen at least once at all wavelengths 
 it will be colored corresponding to "1", etc. A least-hits coverage map 
 corresponds to a scan's minimum coverage at any chosen wavelength range.
-
-.. figure:: ./_build/phi_365_uniform_fulllambda.png
-   :align: center
-   :alt: Deep Sky Scan
-   :figclass: align-center
-**Fig 3)** Hits Map of Deep Sky Scan About North Celestial Pole (Polar Plot)
-
-   ..
-   
-
 
 
 Version Information
