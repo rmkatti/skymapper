@@ -14,7 +14,8 @@ Caltech/Jet Propulsion Laboratory.
    :alt: All Sky scan
    :figclass: align-center
 
-   ..
+**Fig 1) Hits Map of All Sky Scan (Mollweide Projection)**
+
 
 What is SPHEREx?
 ----------------
@@ -62,23 +63,22 @@ by 1000 times.
 What is **skymapper**?
 -----------------------
 
-**Hits Map of All Sky Scan (Mollweide Projection)**
 
 
-**Hits Map of Deep Sky Scan About North Celestial Pole (Polar Plot)** 
 
 .. figure:: ./_build/phi_365_uniform_fulllambda.png
    :align: center
    :alt: Deep Sky Scan
    :figclass: align-center
+**Fig 2) Hits Map of Deep Sky Scan About North Celestial Pole (Polar Plot)** 
 
    ..
    
 The SPHEREx mission relies on two surveys, a low-redundancy large-area 
 "all-sky" survey and a high-redundancy "deep-sky" survey about the 
 celestial poles.
-*\ skymapper *\ was created to define, analyze, and visualize scan strategies to achieve
-these two surveys. Coverage maps generated using *\ skymapper *\ will be 
+*\ skymapper*\ was created to define, analyze, and visualize scan strategies to achieve
+these two surveys. Coverage maps generated using *\ skymapper*\ will be 
 published in the SPHEREx proposal in December 2014 (see Citation 1).
 
 The SPHEREx spectrophotometer consists of near-IR detector arrays covered 
@@ -90,7 +90,7 @@ Since there are no moving parts associated with
 the spectrophotometer, sky coverage is achieved by strategically pointing 
 the spacecraft in desired directions.
 
-*\ skymapper *\ discretizes the sky into equal-area iso-latitude "sky pixels" 
+*\ skymapper*\ discretizes the sky into equal-area iso-latitude "sky pixels" 
 defined by the HEALPIX algorithm. It generates and/or reads in a list of 
 pointing directions
 parametrized by the polar, azimuthal, and axial angles of the axis passing 
