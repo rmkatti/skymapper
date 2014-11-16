@@ -28,37 +28,19 @@ sky surveys to address NASA's three major astrophysics goals:
 SPHEREx seeks to describe the nature of cosmic inflation, the theorized phase of
 of accelerated expansion in the early universe. The mission will produce a 
 catalog of low-redshift galaxies to calculate non-Gaussianity in the 
-distribution of matter in the universe.Ultimately, these results will be used 
-to estimate the so-called |fnL| parameter. 
+distribution of matter in the universe.
+Ultimately, these results will be used to estimate the so-called |fnL| parameter. 
 |fnL| > 1 would suggest that several fundamental fields drove inflation, while
 |fnL| < 1 would suggest that a single fundamental field drove inflation. 
-Either result will be a major advance in current understanding of the 
-physical universe.  
+Either result would be a major advancement in current understanding of the physical universe.  
 
 * **Explore the origin and evolution of galaxies**
-
-To probe galaxy formation, SPHEREx will map fluctuations in emission line 
-intensity as a function of redshift (and therefore time). Since emission 
-line intensity traces 
-the distribution of matter in the universe, this intensity mapping 
-techinque exploits the 
-large-volume SPHEREx survey to give clustering
-information about faint galaxies. By observing at several wavelengths, SPHEREx 
-will map the intensity fluctuations of several spectral lines as a function of 
-redshift. The work will culminate in robust estimates of the rate galaxy of
-formation.
+Mapping large-scale structure in multiple redshifted galactic emission lines
+What are the lines?
+What is large-scale structure
+How does this explore the origin
 
 * **Discover and study planets around other stars, and explore whether they could harbor life**
-
-Star formation occurs in dense interstellar clouds of dust and ice. 
-Since planets
-are assembled from interstellar dust and ice, it has been
-hypothesized that water in our solar system is primarily due to interstellar
-ice with minimal processing in the pre-solar disk. This remains an open
-question due to the small number of samples taken of ice abundance. SPHEREx
-will remedy this by increasing the sample of galactice ice absorption 
-by 1000 times.
-
 
 What is **skymapper**?
 -----------------------
