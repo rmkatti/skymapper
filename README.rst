@@ -113,6 +113,8 @@ the spacecraft in desired directions.
 | 5) Generates redundancy maps, a.k.a. "hits maps",
      at desired wavelength ranges, with sky pixels colored
      according to the redundancy of the survey in that wavelength range. 
+|    Deep-sky scans (Fig. 1) are plotted as polar plots about the celestial pole (survey is symmetric for North and South celestial poles). 
+|    All-sky scans (Fig. 2) are plotted on Mollweide full-sky projections. 
 |
 | 6) Generates **least-hits coverage maps** (Fig. 1), in which  each sky pixel is colored 
      corresponding to the
@@ -120,11 +122,6 @@ the spacecraft in desired directions.
      any wavlength it not be colored, if it is seen at least once at all wavelengths 
      it will be colored corresponding to "1", etc. A least-hits coverage map 
      corresponds to a scan's minimum coverage for all wavelengths.
-|
-| 7) Deep-sky scans (Fig. 1) are plotted as polar plots about the celestial pole (survey is symmetric for North and 
-     South celestial poles). 
-|
-| 8) All-sky scans (Fig. 2) are plotted on Mollweide full-sky projections. 
 
 
 
