@@ -113,7 +113,7 @@ the spacecraft in desired directions.
 | 5) Generates redundancy maps, a.k.a. "hits maps",
      at desired wavelength ranges, with sky pixels colored
      according to the redundancy of the survey in that wavelength range. 
-
+|
 | 6) Generates **least-hits coverage maps** (Fig. 1), in which  each sky pixel is colored 
      corresponding to the
      least number of hits for all wavelengths, i.e. if a pixel is missed at
