@@ -96,16 +96,16 @@ the spacecraft in desired directions.
 **  *\ skymapper *\  Capabilities:**
 |* Discretizes the sky into equal-area iso-latitude "sky pixels" defined by the HEALPIX algorithm. 
 
-|* Generates and/or reads in a list of pointing directions
+| * Generates and/or reads in a list of pointing directions
 parametrized by the polar, azimuthal, and axial angles of the axis passing 
 through the center of Earth and the center of the FOV. 
 
-|* For each pointing, records the sky pixel 
+| * For each pointing, records the sky pixel 
 coordinates observed at each wavelength of the FOV 
 using an efficient Pandas dataframe and
 NumPy methods. 
 
-|* Produces a figure-of-merit associated with the efficiency and effective 
+| * Produces a figure-of-merit associated with the efficiency and effective 
 area of the scan.
 
 |* Generates redundancy maps, a.k.a. "hits maps",
