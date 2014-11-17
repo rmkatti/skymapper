@@ -93,12 +93,12 @@ Since there are no moving parts associated with
 the spectrophotometer, sky coverage is achieved by strategically pointing 
 the spacecraft in desired directions.
 
-**skymapper Capabilities:**
+**Capabilities:**
 
-| Discretizes the sky into equal-area iso-latitude "sky pixels" defined by 
+| 1) Discretizes the sky into equal-area iso-latitude "sky pixels" defined by 
   the HEALPIX algorithm. 
 |
-| Generates and/or reads in a list of pointing directions
+| 2) Generates and/or reads in a list of pointing directions
   parametrized by the polar, azimuthal, and axial angles of the axis passing 
   through the center of Earth and the center of the FOV. 
 |
