@@ -93,22 +93,22 @@ Since there are no moving parts associated with
 the spectrophotometer, sky coverage is achieved by strategically pointing 
 the spacecraft in desired directions.
 
-**  *\ skymapper *\  Capabilities:**
+** skymapper Capabilities:**
 
-|*Discretizes the sky into equal-area iso-latitude "sky pixels" defined by 
+| Discretizes the sky into equal-area iso-latitude "sky pixels" defined by 
   the HEALPIX algorithm. 
 |
-| *Generates and/or reads in a list of pointing directions
-   parametrized by the polar, azimuthal, and axial angles of the axis passing 
-   through the center of Earth and the center of the FOV. 
+| Generates and/or reads in a list of pointing directions
+  parametrized by the polar, azimuthal, and axial angles of the axis passing 
+  through the center of Earth and the center of the FOV. 
 |
-| *For each pointing, records the sky pixel 
-   coordinates observed at each wavelength of the FOV 
-   using an efficient Pandas dataframe and
-   NumPy methods. 
+| For each pointing, records the sky pixel 
+  coordinates observed at each wavelength of the FOV 
+  using an efficient Pandas dataframe and
+  NumPy methods. 
 |
-| * Produces a figure-of-merit associated with the efficiency and effective 
-area of the scan.
+| Produces a figure-of-merit associated with the efficiency and effective 
+  area of the scan.
 
 |* Generates redundancy maps, a.k.a. "hits maps",
 at desired wavelength ranges, with sky pixels colored
