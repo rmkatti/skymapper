@@ -96,11 +96,11 @@ the spacecraft in desired directions.
 **Capabilities:**
 
 | 1) Discretizes the sky into equal-area iso-latitude "sky pixels" defined by 
-  the HEALPIX algorithm. 
+     the HEALPIX algorithm. 
 |
 | 2) Generates and/or reads in a list of pointing directions
-  parametrized by the polar, azimuthal, and axial angles of the axis passing 
-  through the center of Earth and the center of the FOV. 
+     parametrized by the polar, azimuthal, and axial angles of the axis passing 
+     through the center of Earth and the center of the FOV. 
 |
 | For each pointing, records the sky pixel 
   coordinates observed at each wavelength of the FOV 
