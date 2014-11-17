@@ -93,37 +93,36 @@ Since there are no moving parts associated with
 the spectrophotometer, sky coverage is achieved by strategically pointing 
 the spacecraft in desired directions.
 
-** *\ skymapper *\  Capabilities:**
-* Discretizes the sky into equal-area iso-latitude "sky pixels" 
-defined by the HEALPIX algorithm. 
+**  *\ skymapper *\  Capabilities:**
+|* Discretizes the sky into equal-area iso-latitude "sky pixels" defined by the HEALPIX algorithm. 
 
-* Generates and/or reads in a list of pointing directions
+|* Generates and/or reads in a list of pointing directions
 parametrized by the polar, azimuthal, and axial angles of the axis passing 
 through the center of Earth and the center of the FOV. 
 
-* For each pointing, records the sky pixel 
+|* For each pointing, records the sky pixel 
 coordinates observed at each wavelength of the FOV 
 using an efficient Pandas dataframe and
 NumPy methods. 
 
-* Produces a figure-of-merit associated with the efficiency and effective 
+|* Produces a figure-of-merit associated with the efficiency and effective 
 area of the scan.
 
-* Generates redundancy maps, a.k.a. "hits maps",
+|* Generates redundancy maps, a.k.a. "hits maps",
 at desired wavelength ranges, with sky pixels colored
 according to the redundancy of the survey in that wavelength range. 
 
-* Generates **least-hits coverage maps** (Fig. 1), in which  each sky pixel is colored 
+|* Generates **least-hits coverage maps** (Fig. 1), in which  each sky pixel is colored 
 corresponding to the
 least number of hits for all wavelengths, i.e. if a pixel is missed at
 any wavlength it not be colored, if it is seen at least once at all wavelengths 
 it will be colored corresponding to "1", etc. A least-hits coverage map 
 corresponds to a scan's minimum coverage for all wavelengths.
 
-* Deep-sky scans (Fig. 1) are plotted as polar plots about the celestial pole (survey is symmetric for North and 
+|* Deep-sky scans (Fig. 1) are plotted as polar plots about the celestial pole (survey is symmetric for North and 
 South celestial poles). 
 
-* All-sky scans (Fig. 2) are plotted on Mollweide full-sky projections. 
+|* All-sky scans (Fig. 2) are plotted on Mollweide full-sky projections. 
 
 
 
