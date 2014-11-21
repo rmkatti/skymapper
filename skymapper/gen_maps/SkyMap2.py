@@ -3,8 +3,6 @@ This class generates a dictionary of sky pixel coverage at each wavelength
 for a rectangular linear variable filter with two wavelength bands placed 
 symmetrically about the longer dimension. 
 
-Future Work: Generalization to arbitrary field of view
-
 Initialization defines the field of view (FOV) dimensions and wavelength 
 steps across the FOV. In our case, the FOV is a rectangular linear variable 
 filter (LVF), parametrized by an azimuthal range and a polar range.
@@ -16,9 +14,10 @@ angle of the FOV center on [0,pi], phis are the azimuthal angle of the
 FOV center on [0,2*pi], and the ax's are axial angle about the axis defined from 
 the origin through the FOV center
 
-Output is a dictionary with wavelengths as keys and a list of 
-sky pixel centers (theta,phi) viewed at that wavelength.
+Output is a pandas dataframe level=0 theta values, level=1 phi values,
+level=2 wavelength values, cells number of hits.
 '''
+
 import matplotlib
 matplotlib.use('agg')
 import matplotlib.pyplot as plt
@@ -92,23 +91,25 @@ class SkyMap2(object):
         e.g. {pointID1:[ (theta0, phi0), (theta1, phi1)...], pointID2:...} '''
               
         theta, phi, psi=pointing
-       
-        # R1 is the matrix rotating the healpix pixel centers to the frame
-        # in which the pointing center (thetac,phic) is at 
-        # (x=1,y=0,z=0)=(thetac_new=pi/2, phic_new=0), R1inv is the inverse 
-        #matrix
-
-        
+        # Remove sky pixels outside the range of the FOV pointing        
         cutoff_dim = max(self.LVF_theta_dim, self.LVF_phi_dim)
         upper_theta= theta+1.5*cutoff_dim
         lower_theta= theta-1.5*cutoff_dim
 
+        # Remove sky pixels outside desired theta values
         sky_pixels_in = self.sky_pixels[ ( self.sky_pixels[:,0]<upper_theta) & (self.sky_pixels[:,0]>lower_theta) ]
      
+        # Remove sky pixels outside desired phi values
         if  (30.0*pi/180 < theta < 150.0*pi/180.0) & (pi/4< phi < 7*pi/4):
             upper_phi= phi + 1.5*cutoff_dim
             lower_phi= phi - 1.5*cutoff_dim
             sky_pixels_in = self.sky_pixels[ (self.sky_pixels[:,1] < upper_phi) & (self.sky_pixels[:,1] > lower_phi)  ]
+
+
+        # R1 is the matrix rotating the healpix pixel centers to the frame
+        # in which the pointing center (thetac,phic) is at 
+        # (x=1,y=0,z=0)=(thetac_new=pi/2, phic_new=0), R1inv is the inverse 
+        #matrix
 
         R1, R1inv= self.rot_matrix(theta,phi,psi)
         
@@ -116,10 +117,7 @@ class SkyMap2(object):
         time2=time.time()
         
 
-        # Make dictionary of rotated pixel pointings. For a given theta, 
-        # gives the list of phi values associated with that theta
-
-        skypix_list= np.array([]) # skypix_list[theta]=[phi1,phi2...] 
+       skypix_list= np.array([]) # 
         
         # Remove thetas outside of bounds
         self.rot_sky_pixels= self.rot_sky_pixels[ (self.theta_low < self.rot_sky_pixels[:,0]) & (self.rot_sky_pixels[:,0] <= self.theta_hi)] 

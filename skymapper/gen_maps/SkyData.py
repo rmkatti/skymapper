@@ -14,7 +14,15 @@ import random
 from skymapper.visualize.plot_points import moll_plot
 
 class SkyData(object):
-    '''self.sky_table format: cols: 'theta', 'phi', 'lambda_0',...'lambda_n' '''
+    ''' Initialize SkyData() with 1-D numpy arrays of the theta and phi values of
+        your sky pixel centers (theta_in, phi_in). The arrays should be the 
+        same length and 
+        correspond to the (theta, phi) pairs of your sky pixel centers.
+
+        lambda_in is the 1-D array of wavelength values your FOV observes at.
+
+        self.sky_table format:
+             cols: 'theta', 'phi', 'lambda_0',...'lambda_n' '''
 
     def __init__(self, theta_in, phi_in, lambda_in):
         '''theta_in, phi_in numpy arrays of same length, 
@@ -65,7 +73,7 @@ class SkyData(object):
         return least_array
 
     def sum_hits_array(self):
-        '''Returns numpy array with col: [thetas, phis, least_hits] '''
+        '''Returns numpy array with col: [thetas, phis, sum_hits] '''
 
         grouped=self.sky_df.groupby(level=[0,1]).sum()
         least_array=grouped.reset_index().values
@@ -73,7 +81,7 @@ class SkyData(object):
         return least_array
 
     def lambda_counts_sum(self):
-        '''Returns numpy array with col: [thetas, phis, least_hits] '''
+        '''Returns numpy array with col: [thetas, phis, sum_lambda_hits] '''
 
         grouped=self.sky_df.groupby(level=2).sum()
         lambda_array=grouped.reset_index().values
@@ -90,6 +98,7 @@ class SkyData(object):
 
 if __name__=='__main__':
     
+    # Example sky discretization. Discretizes sky into 12*(2**8)**2 pixels
     nside=2**8
     npix=12*nside**2 
     ind=np.arange(npix) # index of pointings
