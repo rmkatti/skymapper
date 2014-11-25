@@ -116,7 +116,9 @@ the spacecraft in desired directions.
     Deep-sky scans (Fig. 1) are plotted as polar plots about the celestial pole (survey is symmetric for North and South celestial poles). 
     All-sky scans (Fig. 2) are plotted on Mollweide full-sky projections. 
 |
+
 .. _here:
+
 | 6) Generates **least-hits coverage maps** (Fig. 1), in which  each sky pixel is colored 
      corresponding to the
      least number of hits for all wavelengths, i.e. if a pixel is missed at
