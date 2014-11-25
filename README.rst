@@ -119,8 +119,8 @@ the spacecraft in desired directions.
 
 .. _here:
 
-| 6) Generates **least-hits coverage maps** (Fig. 1), in which  each sky pixel is colored 
-     corresponding to the
+| 6) Generates **least-hits coverage maps** (Fig. 1). In **least hits coverage maps**,
+     each sky pixel is colored corresponding to the
      least number of hits for all wavelengths, i.e. if a pixel is missed at
      any wavlength it not be colored, if it is seen at least once at all wavelengths 
      it will be colored corresponding to "1", etc. A least-hits coverage map 
