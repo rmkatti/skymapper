@@ -20,7 +20,7 @@ Survey.
 Clockwise from upper left: Day 91, Day 183, Day 273, 1 Year.
 Least hits maps color each sky pixel by the minimum number of views over all 
 wavelengths of the spectrophotometer 
-(see point 6 of "What is skymapper?" section for more details). 
+(click here_ for further information). 
 All plots are looking down on the north celestial pole.  
  
 What is SPHEREx?
@@ -116,6 +116,7 @@ the spacecraft in desired directions.
     Deep-sky scans (Fig. 1) are plotted as polar plots about the celestial pole (survey is symmetric for North and South celestial poles). 
     All-sky scans (Fig. 2) are plotted on Mollweide full-sky projections. 
 |
+.. _here:
 | 6) Generates **least-hits coverage maps** (Fig. 1), in which  each sky pixel is colored 
      corresponding to the
      least number of hits for all wavelengths, i.e. if a pixel is missed at
