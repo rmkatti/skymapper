@@ -162,11 +162,13 @@ in CMB- and astronomy-related work:
 Citations
 ------------
 
-1) Bock, J.J. et al. In Press. *\ SPHEREx: An All-Sky Spectral Survey*\ .
-California Institute of Technology, Pasadena.
+1) Bock, J.J. et al. "SPHEREx: An All-Sky Spectral Survey", 2014, in preparation.
 
-2) S. Spangelo, S. Unwin, J. Bock, “All Sky Survey Mission Observing 
+2) S. Spangelo, S. Unwin, R.Katti. J. Bock, “All Sky Survey Mission Observing 
 Scenario Strategy”, Journal of Astronomical Telescopes,  Instruments, and 
 Systems (published by SPIE), Nov. 2014 (submitted).
-
 * Visit http://saraspangelo.com/publications/ for further information
+
+3) Dore et al. including R. Katti, "Cosmological studies with a full 
+sky low resolution spectroscopic survey", 2014, in preparation.
+
