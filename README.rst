@@ -44,16 +44,17 @@ physical universe.
 
 * **Explore the origin and evolution of galaxies**
 
-To probe galaxy formation, SPHEREx will map fluctuations in emission line 
-intensity as a function of redshift (and therefore time). Since emission 
-line intensity traces 
-the distribution of matter in the universe, this intensity mapping 
+To probe galaxy formation, SPHEREx will map fluctuations in the extragalactic 
+background light (EBL) as a function of redshift (and therefore time). Since 
+EBL traces 
+clustering of faint sources, e.g. dwarf galaxies, intra-halo light, this 
+intensity mapping 
 techinque exploits the 
-large-volume SPHEREx survey to give clustering
+deep-sky SPHEREx survey to give clustering
 information about faint galaxies. By observing at several wavelengths, SPHEREx 
-will map the intensity fluctuations of several spectral lines as a function of 
-redshift. The work will culminate in robust estimates of the rate galaxy of
-formation.
+will map EBL fluctuations at several spectral lines, each 
+associated with a different redshift. The work will culminate in robust 
+estimates of the rate galaxy of formation.
 
 * **Discover and study planets around other stars, and explore whether they could harbor life**
 
