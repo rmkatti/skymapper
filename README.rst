@@ -47,7 +47,7 @@ physical universe.
 To probe galaxy formation, SPHEREx will map fluctuations in the extragalactic 
 background light (EBL) as a function of redshift (and therefore time). Since 
 EBL traces 
-clustering of faint sources, e.g. dwarf galaxies, intra-halo light, this 
+clustering of faint sources, e.g. dwarf galaxies and intra-halo light, this 
 intensity mapping 
 techinque exploits the 
 deep-sky SPHEREx survey to give clustering
